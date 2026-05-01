@@ -1,0 +1,17 @@
+The following commands are available:
+instructions - view the currently loaded instructions in assembly format
+machine - view the currently loaded instructions in machine code format
+append - append an instruction to the list
+insert - insert an instruction to the list
+overwrite - overwrite an instruction in the list
+remove - remove an instruction from the list
+status - show the current status of all registers
+run - run through the entire program without stopping
+step - take one step through the loaded program and explain it
+explain - explain the step that was last taken
+reset - reset the state of the computer's registers
+save - save the complete state of the computer
+load - load a saved computer state
+export - export the assembly instructions to a file
+import - import assembly instructions from a file
+quit - close the application

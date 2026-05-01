@@ -1,0 +1,1 @@
+{"flagZ":0,"instructions":["move r1 6","inc r1","move r2 4","move r3 1","loop:","add r1 r2","sub r2 r3","jge loop","halt"],"programCounter":5,"fnCode":0,"flagO":0,"flagN":0,"valWrite":6,"nextProgramCounter":7,"valC":0,"regWrite":1,"valB":0,"valA":6,"regA":1,"nextStep":0,"registers":[6,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"opCode":3,"regB":0,"errors":[]}

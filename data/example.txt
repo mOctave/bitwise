@@ -1,0 +1,9 @@
+move r1 6
+inc r1
+move r2 4
+move r3 1
+loop:
+add r1 r2
+sub r2 r3
+jge loop
+halt

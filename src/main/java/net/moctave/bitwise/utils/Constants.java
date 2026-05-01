@@ -1,0 +1,67 @@
+package net.moctave.bitwise.utils;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+/** A class holding constants to be used by across multiple parts of the program. */
+public abstract class Constants {
+	// MARK: Hex Digits
+	/** An array of hex digits used to represent binary numbers. */
+	public static final char[] HEX_DIGITS = new char[]{
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8', 
+		'9',
+		'A',
+		'B',
+		'C',
+		'D',
+		'E',
+		'F'
+	};
+
+
+	// MARK: Fonts
+	/** A monospaced font. */
+	public static final Font FONT_MONOSPACED = new Font("Courier New", Font.PLAIN, 14);
+	/** An ordinary sans-serif font. */
+	public static final Font FONT_STANDARD = new Font("Arial", Font.PLAIN, 14);
+	/** A bold sans-serif font. */
+	public static final Font FONT_BOLD = new Font("Arial", Font.BOLD, 14);
+
+
+	// MARK: Colours
+	/** The standard grey for this app. */
+	public static final Color COLOR_GREY = new Color(160, 160, 160);
+	/** The standard silver for this app. */
+	public static final Color COLOR_SILVER = new Color(235, 235, 235);
+	/** The standard green for this app. */
+	public static final Color COLOR_GREEN = new Color(0, 164, 11);
+	/** The standard yellow for this app. */
+	public static final Color COLOR_YELLOW = new Color(204, 159, 51);
+	/** The standard red for this app. */
+	public static final Color COLOR_RED = new Color(191, 64, 64);
+	/** The standard blue for this app. */
+	public static final Color COLOR_BLUE = new Color(13, 121, 242);
+
+	// MARK: Standard Border
+	private static final int inner = 1;
+	private static final int outer = 1;
+	/** A border to be shared by GUI components. */
+	public static final Border BORDER_STANDARD = BorderFactory.createCompoundBorder(
+			BorderFactory.createEmptyBorder(inner, inner, inner, inner),
+			BorderFactory.createCompoundBorder(
+					BorderFactory.createLineBorder(COLOR_GREY),
+					BorderFactory.createEmptyBorder(outer, outer, outer, outer)
+			)
+	);
+}
