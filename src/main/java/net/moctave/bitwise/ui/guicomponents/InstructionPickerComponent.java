@@ -8,19 +8,21 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** An abstract class providing methods shared by all components of an instrucion picker. */
 public abstract class InstructionPickerComponent extends JPanel {
-	private JLabel header;
-	private JPanel content;
+	private @NonNull JLabel header;
+	private @NonNull JPanel content;
 
 	// MARK: Constructor
 	/**
 	 * Creates a new empty panel with the given label and a vertical box layout.
 	 * @param label the label to display above the component
 	 */
-	public InstructionPickerComponent(String label) {
+	public InstructionPickerComponent(@NonNull String label) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel headerPanel = new JPanel();
@@ -51,7 +53,7 @@ public abstract class InstructionPickerComponent extends JPanel {
 	}
 
 	// MARK: Getters
-	public JPanel getContent() {
+	public @NonNull JPanel getContent() {
 		return content;
 	}
 }

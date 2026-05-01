@@ -3,6 +3,8 @@ package net.moctave.bitwise.model.instructions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 /** An instruction telling the computer to peform a conditional jump. */
 public class Label extends Instruction {
 	// MARK: Constructor
@@ -11,19 +13,19 @@ public class Label extends Instruction {
 	 * isLabel set to true, and all other options set to 0, null, or false.
 	 * @param labelText the text of this label
 	 */
-	public Label(String labelText) {
+	public Label(@NonNull String labelText) {
 		super(5,0,0,0,0, labelText, true);
 	}
 
 
 	@Override
-	public List<Byte> asBytes() {
+	public @NonNull List<Byte> asBytes() {
 		return new ArrayList<>();
 	}
 
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return getLabel() + ":";
 	}
 

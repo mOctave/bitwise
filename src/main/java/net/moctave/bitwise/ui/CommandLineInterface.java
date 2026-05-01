@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.exceptions.LabelNotFoundException;
 import net.moctave.bitwise.model.Computer;
@@ -17,9 +19,9 @@ import net.moctave.bitwise.utils.Conversion;
 
 /** A command-line interface. */
 public class CommandLineInterface implements UserInterface {
-	private final Map<String, Command> commands;
-	private final Scanner scanner;
-	private final TextualHelpCommand helpCommand;
+	private final @NonNull Map<String, Command> commands;
+	private final @NonNull Scanner scanner;
+	private final @NonNull TextualHelpCommand helpCommand;
 
 
 	// MARK: Constructor
@@ -79,12 +81,12 @@ public class CommandLineInterface implements UserInterface {
 	}
 
 	@Override
-	public Instruction seekInstruction() throws InstructionParseException {
+	public @NonNull Instruction seekInstruction() throws InstructionParseException {
 		return InstructionParser.convertToInstruction(scanner.nextLine());
 	}
 
 	@Override
-	public File seekFile(boolean saveMode) {
+	public @NonNull File seekFile(boolean saveMode) {
 		System.out.println("Please enter a file path relative to ./data/:");
 		return new File("./data/" + scanner.nextLine());
 	}
@@ -143,12 +145,12 @@ public class CommandLineInterface implements UserInterface {
 	 * @param r the register to represent
 	 * @return the labelled representation of the register
 	 */
-	private static String represent(Register r) {
+	private static @NonNull String represent(@NonNull Register r) {
 		return String.format("%s %s", r.getName(), r.valueAsString());
 	}
 
 	@Override
-	public void showInformation(String msg) {
+	public void showInformation(@NonNull String msg) {
 		System.out.println(msg);
 	}
 

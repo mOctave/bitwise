@@ -1,5 +1,7 @@
 package net.moctave.bitwise.model.instructions;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** An instruction telling the computer to increment the value in a register. */
@@ -17,7 +19,7 @@ public class IncInstruction extends UnaryInstruction {
 
 	// MARK: Methods
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return String.format("inc r%s", Constants.HEX_DIGITS[getRegA()]);
 	}
 }

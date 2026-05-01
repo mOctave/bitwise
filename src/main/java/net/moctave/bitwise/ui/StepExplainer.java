@@ -1,9 +1,12 @@
 package net.moctave.bitwise.ui;
 
+import org.jspecify.annotations.NullMarked;
+
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.model.Register;
 
 // A class of helper methods for explaining the last step taken by the computer.
+@NullMarked
 public abstract class StepExplainer {
 	// MARK: Explain Last Step
 	/**

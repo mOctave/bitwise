@@ -16,23 +16,23 @@ public class Computer {
 	// MARK: Fields
 	private static Computer instance = new Computer();
 
-	private Register opCode;
-	private Register fnCode;
-	private Register regA;
-	private Register regB;
-	private Register regWrite;
-	private Register valA;
-	private Register valB;
-	private Register valC;
-	private Register valWrite;
-	private Register programCounter;
-	private Register nextProgramCounter;
-	private Register flagZ;
-	private Register flagN;
-	private Register flagO;
-	private List<Instruction> instructions;
+	private @NonNull Register opCode;
+	private @NonNull Register fnCode;
+	private @NonNull Register regA;
+	private @NonNull Register regB;
+	private @NonNull Register regWrite;
+	private @NonNull Register valA;
+	private @NonNull Register valB;
+	private @NonNull Register valC;
+	private @NonNull Register valWrite;
+	private @NonNull Register programCounter;
+	private @NonNull Register nextProgramCounter;
+	private @NonNull Register flagZ;
+	private @NonNull Register flagN;
+	private @NonNull Register flagO;
+	private @NonNull List<Instruction> instructions;
 	private int nextStep;
-	private Register[] registers;
+	private @NonNull Register[] registers;
 
 	// MARK: Constructor
 	/**
@@ -118,7 +118,7 @@ public class Computer {
 	 * @return This computer's instructions, as a list of bytes
 	 * @throws LabelNotFoundException If a missing label is found in conversion
 	 */
-	public List<Byte> asByteList() throws LabelNotFoundException {
+	public @NonNull List<Byte> asByteList() throws LabelNotFoundException {
 		updateAddressesToMatchLabels();
 		List<Byte> bytes = new ArrayList<>();
 		for (Instruction instruction : instructions) {
@@ -595,7 +595,7 @@ public class Computer {
 
 
 	// MARK: Getters / Setters
-	public static Computer getInstance() {
+	public static @NonNull Computer getInstance() {
 		return instance;
 	}
 
@@ -603,63 +603,63 @@ public class Computer {
 		instance = c;
 	}
 
-	public Register getOpCode() {
+	public @NonNull Register getOpCode() {
 		return opCode;
 	}
 
-	public Register getFnCode() {
+	public @NonNull Register getFnCode() {
 		return fnCode;
 	}
 
-	public Register getRegA() {
+	public @NonNull Register getRegA() {
 		return regA;
 	}
 
-	public Register getRegB() {
+	public @NonNull Register getRegB() {
 		return regB;
 	}
 
-	public Register getRegWrite() {
+	public @NonNull Register getRegWrite() {
 		return regWrite;
 	}
 
-	public Register getValA() {
+	public @NonNull Register getValA() {
 		return valA;
 	}
 
-	public Register getValB() {
+	public @NonNull Register getValB() {
 		return valB;
 	}
 
-	public Register getValC() {
+	public @NonNull Register getValC() {
 		return valC;
 	}
 
-	public Register getValWrite() {
+	public @NonNull Register getValWrite() {
 		return valWrite;
 	}
 
-	public Register getProgramCounter() {
+	public @NonNull Register getProgramCounter() {
 		return programCounter;
 	}
 
-	public Register getNextProgramCounter() {
+	public @NonNull Register getNextProgramCounter() {
 		return nextProgramCounter;
 	}
 
-	public Register getFlagZ() {
+	public @NonNull Register getFlagZ() {
 		return flagZ;
 	}
 
-	public Register getFlagN() {
+	public @NonNull Register getFlagN() {
 		return flagN;
 	}
 
-	public Register getFlagO() {
+	public @NonNull Register getFlagO() {
 		return flagO;
 	}
 
-	public List<Instruction> getInstructions() {
+	public @NonNull List<Instruction> getInstructions() {
 		return instructions;
 	}
 
@@ -667,7 +667,7 @@ public class Computer {
 		return nextStep;
 	}
 
-	public Register[] getRegisters() {
+	public @NonNull Register[] getRegisters() {
 		return registers;
 	}
 }

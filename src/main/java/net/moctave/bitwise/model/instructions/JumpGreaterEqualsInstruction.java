@@ -1,5 +1,7 @@
 package net.moctave.bitwise.model.instructions;
 
+import org.jspecify.annotations.NonNull;
+
 /** An instruction telling the computer to jump when last result ≥ 0. */
 public class JumpGreaterEqualsInstruction extends JumpInstruction {
 	// MARK: Constructor
@@ -8,14 +10,14 @@ public class JumpGreaterEqualsInstruction extends JumpInstruction {
 	 * and all other options set to 0, null, or false.
 	 * @param label the label for this instruction to jump to
 	 */
-	public JumpGreaterEqualsInstruction(String label) {
+	public JumpGreaterEqualsInstruction(@NonNull String label) {
 		super(3, label);
 	}
 
 
 	// MARK: Methods
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return String.format("jge %s", getLabel());
 	}
 }

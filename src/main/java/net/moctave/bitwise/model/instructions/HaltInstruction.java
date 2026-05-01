@@ -3,6 +3,8 @@ package net.moctave.bitwise.model.instructions;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 /** An instruction telling the computer to halt executaion immediately. */
 public class HaltInstruction extends Instruction {
 	// MARK: Constructor
@@ -16,12 +18,12 @@ public class HaltInstruction extends Instruction {
 
 	// MARK: Methods
 	@Override
-	public List<Byte> asBytes() {
+	public @NonNull List<Byte> asBytes() {
 		return Arrays.asList(new Byte[]{0x00});
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return "halt";
 	}
 

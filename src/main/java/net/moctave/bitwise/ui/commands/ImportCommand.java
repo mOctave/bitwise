@@ -3,6 +3,8 @@ package net.moctave.bitwise.ui.commands;
 import java.io.File;
 import java.io.IOException;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.OperationCancelledException;
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.model.instructions.Instruction;
@@ -15,7 +17,7 @@ public class ImportCommand extends Command {
 	 * Creates a new ImportCommand with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public ImportCommand(UserInterface ui) {
+	public ImportCommand(@NonNull UserInterface ui) {
 		super(ui);
 	}
 

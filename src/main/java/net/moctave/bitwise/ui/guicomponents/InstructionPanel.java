@@ -14,16 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.ui.GraphicalUserInterface;
 import net.moctave.bitwise.utils.Constants;
 
 /** A panel showing a single instruction (in assembly format) and a button to select it. */
 public class InstructionPanel extends JPanel {
-	private final GraphicalUserInterface gui;
+	private final @NonNull GraphicalUserInterface gui;
 	private final int index;
-	private final JLabel label;
-	private final JButton button;
+	private final @NonNull JLabel label;
+	private final @NonNull JButton button;
 
 	// MARK: Constructor
 	/**
@@ -33,7 +35,7 @@ public class InstructionPanel extends JPanel {
 	 * stored in the computer
 	 * @param gui the user interface this panel is a part of
 	 */
-	public InstructionPanel(int index, GraphicalUserInterface gui) {
+	public InstructionPanel(int index, @NonNull GraphicalUserInterface gui) {
 		this.gui = gui;
 		this.index = index;
 
@@ -99,7 +101,7 @@ public class InstructionPanel extends JPanel {
 		 * Selects the index of the associated instruction panel.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			if (gui.getSelectedIndex() == index) {
 				gui.setSelectedIndex(-1);
 			} else {

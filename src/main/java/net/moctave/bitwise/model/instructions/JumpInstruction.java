@@ -3,6 +3,8 @@ package net.moctave.bitwise.model.instructions;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 /** An instruction telling the computer to peform a conditional jump. */
 public abstract class JumpInstruction extends Instruction {
 	// MARK: Constructor
@@ -13,14 +15,14 @@ public abstract class JumpInstruction extends Instruction {
 	 * to jump, bounded on [0, 6]
 	 * @param label the label for this instruction to jump to
 	 */
-	public JumpInstruction(int fnCode, String label) {
+	public JumpInstruction(int fnCode, @NonNull String label) {
 		super(4,fnCode, 0, 0, 0, label, false);
 	}
 
 
 	// MARK: Methods
 	@Override
-	public List<Byte> asBytes() {
+	public @NonNull List<Byte> asBytes() {
 		int valC = getValC();
 
 		return Arrays.asList(new Byte[]{

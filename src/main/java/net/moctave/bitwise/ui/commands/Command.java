@@ -1,11 +1,13 @@
 package net.moctave.bitwise.ui.commands;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.ui.UserInterface;
 
 /** A command that can be executed by either the CLI or GUI. */
 public abstract class Command {
 	// MARK: Fields
-	private final UserInterface ui;
+	private final @NonNull UserInterface ui;
 
 
 	// MARK: Constructor
@@ -13,7 +15,7 @@ public abstract class Command {
 	 * Creates a new command with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public Command(UserInterface ui) {
+	public Command(@NonNull UserInterface ui) {
 		this.ui = ui;
 	}
 
@@ -26,7 +28,7 @@ public abstract class Command {
 
 
 	// MARK: Getters
-	public UserInterface getUI() {
+	public @NonNull UserInterface getUI() {
 		return ui;
 	}
 }

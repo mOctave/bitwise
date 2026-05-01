@@ -1,5 +1,7 @@
 package net.moctave.bitwise.model.instructions;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** An instruction telling the computer to negate (2's complement) the value in a register. */
@@ -17,7 +19,7 @@ public class NegInstruction extends UnaryInstruction {
 
 	// MARK: Methods
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return String.format("neg r%s", Constants.HEX_DIGITS[getRegA()]);
 	}
 }

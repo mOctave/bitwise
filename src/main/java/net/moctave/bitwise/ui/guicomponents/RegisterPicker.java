@@ -6,19 +6,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** A pane with buttons allowing the user to select a register from 1-15. */
 public class RegisterPicker extends InstructionPickerComponent {
 	private int choice = 1;
-	private JButton[] buttons;
+	private @NonNull JButton[] buttons;
 
 	// MARK: Constructor
 	/**
 	 * Creates a new register picker with r1 selected and the given label.
 	 * @param label the label to display above this picker
 	 */
-	public RegisterPicker(String label) {
+	public RegisterPicker(@NonNull String label) {
 		super(label);
 
 		getContent().setLayout(new GridLayout(0, 2));
@@ -73,7 +75,7 @@ public class RegisterPicker extends InstructionPickerComponent {
 		 * and updates the fonts of the buttons to match the new selection.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			RegisterPicker.this.choice = index;
 			setButtonFonts();
 		}

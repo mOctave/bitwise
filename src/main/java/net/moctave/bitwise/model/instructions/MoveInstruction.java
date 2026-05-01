@@ -3,6 +3,8 @@ package net.moctave.bitwise.model.instructions;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** An instruction telling the computer to move a value into a register. */
@@ -21,7 +23,7 @@ public class MoveInstruction extends Instruction {
 
 	// MARK: Methods
 	@Override
-	public List<Byte> asBytes() {
+	public @NonNull List<Byte> asBytes() {
 		int valC = getValC();
 
 		return Arrays.asList(new Byte[]{
@@ -34,7 +36,7 @@ public class MoveInstruction extends Instruction {
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return String.format("move r%s %d", Constants.HEX_DIGITS[getRegA()], getValC());
 	}
 

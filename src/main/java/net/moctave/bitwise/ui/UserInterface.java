@@ -2,6 +2,8 @@ package net.moctave.bitwise.ui;
 
 import java.io.File;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.exceptions.LabelNotFoundException;
 import net.moctave.bitwise.model.instructions.Instruction;
@@ -26,7 +28,7 @@ public interface UserInterface {
 	 * @return an instruction chosen by the user
 	 * @throws InstructionParseException if user input is unparseable
 	 */
-	public abstract Instruction seekInstruction() throws InstructionParseException;
+	public abstract @NonNull Instruction seekInstruction() throws InstructionParseException;
 
 	/**
 	 * Prompts the user to select a file. If saveMode is enabled, any file will do, otherwise
@@ -34,7 +36,7 @@ public interface UserInterface {
 	 * support file browsing.
 	 * @return a file chosen by the user
 	 */
-	public abstract File seekFile(boolean saveMode);
+	public abstract @NonNull File seekFile(boolean saveMode);
 
 	/**
 	 * Displays the current instructions stored in the computer in assembly format.
@@ -57,7 +59,7 @@ public interface UserInterface {
 	 * Displays the given message to the user.
 	 * @param msg the message to display
 	 */
-	public abstract void showInformation(String msg);
+	public abstract void showInformation(@NonNull String msg);
 
 	/**
 	 * Logs that the last operation was a success.

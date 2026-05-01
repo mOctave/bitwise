@@ -3,17 +3,19 @@ package net.moctave.bitwise.model;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.model.instructions.*;
 import net.moctave.bitwise.utils.Constants;
 
 /** A class with helper methods to convert given lines of manually-entered text to instructions. */
 public abstract class InstructionParser {
-	public static final List<String> BINARY_INSTRUCTIONS =
+	public static final @NonNull List<String> BINARY_INSTRUCTIONS =
 			Arrays.asList(new String[]{"copy", "add", "sub", "and", "or", "xor"});
-	public static final List<String> UNARY_INSTRUCTIONS =
+	public static final @NonNull List<String> UNARY_INSTRUCTIONS =
 			Arrays.asList(new String[]{"inc", "neg", "not"});
-	public static final List<String> JUMP_INSTRUCTIONS =
+	public static final @NonNull List<String> JUMP_INSTRUCTIONS =
 			Arrays.asList(new String[]{"jump", "je", "jle", "jge", "jne", "jl", "jg"});
 
 
@@ -25,7 +27,7 @@ public abstract class InstructionParser {
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
 	 */
-	public static Instruction convertToInstruction(String line)
+	public static @NonNull Instruction convertToInstruction(@NonNull String line)
 			throws InstructionParseException {
 
 		if (line.contains(":")) {
@@ -55,7 +57,7 @@ public abstract class InstructionParser {
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
 	 */
-	private static MoveInstruction convertToMoveInstruction(String line)
+	private static @NonNull MoveInstruction convertToMoveInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
 			String regAText = line.split(" ")[1].toLowerCase();
@@ -72,7 +74,7 @@ public abstract class InstructionParser {
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
 	 */
-	protected static BinaryInstruction convertToBinaryInstruction(String line)
+	protected static @NonNull BinaryInstruction convertToBinaryInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
 			String type = line.split(" ")[0].toLowerCase();
@@ -98,7 +100,7 @@ public abstract class InstructionParser {
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
 	 */
-	protected static UnaryInstruction convertToUnaryInstruction(String line)
+	protected static @NonNull UnaryInstruction convertToUnaryInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
 			String type = line.split(" ")[0].toLowerCase();
@@ -120,7 +122,7 @@ public abstract class InstructionParser {
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
 	 */
-	protected static JumpInstruction convertToJumpInstruction(String line)
+	protected static @NonNull JumpInstruction convertToJumpInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
 			String type = line.split(" ")[0].toLowerCase();
@@ -147,7 +149,7 @@ public abstract class InstructionParser {
 	 * @return the register address represented by the string
 	 * @throws InstructionParseException if the string cannot be parsed to an integer.
 	 */
-	private static int convertToRegisterAddress(String text)
+	private static int convertToRegisterAddress(@NonNull String text)
 			throws InstructionParseException {
 		try {
 			char hexChar = text.toUpperCase().toCharArray()[1];
@@ -169,7 +171,7 @@ public abstract class InstructionParser {
 	 * @return the integer represented by the string
 	 * @throws InstructionParseException if the string cannot be parsed to an integer.
 	 */
-	private static int convertToInteger(String text)
+	private static int convertToInteger(@NonNull String text)
 			throws InstructionParseException {
 		try {
 			return Integer.parseInt(text);
@@ -184,7 +186,7 @@ public abstract class InstructionParser {
 	 * @return the label stored in the string
 	 * @throws InstructionParseException if the string cannot be parsed to a label.
 	 */
-	private static String convertToLabel(String text) throws InstructionParseException {
+	private static @NonNull String convertToLabel(@NonNull String text) throws InstructionParseException {
 		return text.split(":")[0];
 	}
 }

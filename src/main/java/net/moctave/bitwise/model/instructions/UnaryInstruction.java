@@ -3,6 +3,8 @@ package net.moctave.bitwise.model.instructions;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 /** An instruction telling the computer to peform an ALU operation on one value. */
 public abstract class UnaryInstruction extends Instruction {
 	// MARK: Constructor
@@ -20,7 +22,7 @@ public abstract class UnaryInstruction extends Instruction {
 
 	// MARK: Methods
 	@Override
-	public List<Byte> asBytes() {
+	public @NonNull List<Byte> asBytes() {
 		return Arrays.asList(new Byte[]{
 			(byte) ((getOpCode() << 4) + getFnCode()),
 			(byte) (getRegA() << 4)

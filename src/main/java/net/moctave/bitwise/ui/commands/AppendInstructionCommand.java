@@ -1,5 +1,7 @@
 package net.moctave.bitwise.ui.commands;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.exceptions.OperationCancelledException;
 import net.moctave.bitwise.model.Computer;
@@ -12,7 +14,7 @@ public class AppendInstructionCommand extends Command {
 	 * Creates a new AppendInstructionCommand with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public AppendInstructionCommand(UserInterface ui) {
+	public AppendInstructionCommand(@NonNull UserInterface ui) {
 		super(ui);
 	}
 

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jspecify.annotations.NonNull;
 
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.model.Computer;
@@ -24,7 +25,7 @@ public abstract class DataConverter {
 	 * @param computer the computer to convert to a JSON object
 	 * @return the corresponding JSON object
 	 */
-	public static JSONObject serialize(Computer computer) {
+	public static @NonNull JSONObject serialize(@NonNull Computer computer) {
 		JSONObject object = new JSONObject();
 
 		object.put("version", 2);
@@ -58,7 +59,7 @@ public abstract class DataConverter {
 	 * @return the deserialized computer state
 	 * @throws InstructionParseException if an error is encountered parsing instructions
 	 */
-	public static Computer deserialize(JSONObject object) throws InstructionParseException {
+	public static @NonNull Computer deserialize(@NonNull JSONObject object) throws InstructionParseException {
 		int fileVersion = 1;
 		try {
 			fileVersion = object.getInt("version");
@@ -91,7 +92,7 @@ public abstract class DataConverter {
 	 * @return the deserialized instruction list
 	 * @throws InstructionParseException if an error is encountered parsing an instruction
 	 */
-	private static List<Instruction> deserializeInstructions(JSONArray array)
+	private static @NonNull List<Instruction> deserializeInstructions(@NonNull JSONArray array)
 			throws InstructionParseException {
 		List<Instruction> instructions = new ArrayList<>();
 		for (Object obj : array) {

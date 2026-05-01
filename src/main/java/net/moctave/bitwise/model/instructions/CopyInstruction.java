@@ -1,5 +1,7 @@
 package net.moctave.bitwise.model.instructions;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** An instruction telling the computer to copy the value of one register to another. */
@@ -18,7 +20,7 @@ public class CopyInstruction extends BinaryInstruction {
 
 	// MARK: Methods
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return String.format(
 			"copy r%s r%s",
 			Constants.HEX_DIGITS[getRegA()],

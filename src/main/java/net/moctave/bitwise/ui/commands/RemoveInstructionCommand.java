@@ -1,5 +1,7 @@
 package net.moctave.bitwise.ui.commands;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.ui.UserInterface;
 
@@ -9,7 +11,7 @@ public class RemoveInstructionCommand extends Command {
 	 * Creates a new RemoveInstructionCommand with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public RemoveInstructionCommand(UserInterface ui) {
+	public RemoveInstructionCommand(@NonNull UserInterface ui) {
 		super(ui);
 	}
 

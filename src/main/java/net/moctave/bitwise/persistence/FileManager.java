@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONObject;
+import org.jspecify.annotations.NonNull;
 
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.model.InstructionParser;
@@ -16,14 +17,14 @@ import net.moctave.bitwise.model.instructions.Instruction;
 /** A wrapper for a file with methods to read or modify its contents as JSON or assembly. */
 public class FileManager {
 	// MARK: Fields
-	private File file;
+	private final @NonNull File file;
 
 	// MARK: Constructor
 	/**
 	 * Creates a new FileManager for the given file.
 	 * @param file the file to manage
 	 */
-	public FileManager(File file) {
+	public FileManager(@NonNull File file) {
 		this.file = file;
 	}
 
@@ -35,7 +36,7 @@ public class FileManager {
 	 * @param object the object to write
 	 * @throws IOException if the operation fails
 	 */
-	public void writeState(JSONObject object) throws IOException {
+	public void writeState(@NonNull JSONObject object) throws IOException {
 		if (!file.isFile() && (file.exists() || file.isDirectory())) {
 			throw new IOException("Attempted to write to an abnormal file (eg, a directory)");
 		}
@@ -51,7 +52,7 @@ public class FileManager {
 	 * @return the JSON object stored in this file
 	 * @throws IOException if the operation fails
 	 */
-	public JSONObject readState() throws IOException {
+	public @NonNull JSONObject readState() throws IOException {
 		if (!file.exists()) {
 			throw new IOException("File does not exist");
 		}
@@ -76,7 +77,7 @@ public class FileManager {
 	 * @param instructions the list of instructions to write
 	 * @throws IOException if the operation fails
 	 */
-	public void writeInstructions(List<Instruction> instructions) throws IOException {
+	public void writeInstructions(@NonNull List<Instruction> instructions) throws IOException {
 		if (!file.isFile() && (file.exists() || file.isDirectory())) {
 			throw new IOException("Attempted to write to an abnormal file (eg, a directory)");
 		}
@@ -95,7 +96,7 @@ public class FileManager {
 	 * @return the list of instructions stored in this file
 	 * @throws IOException if the operation fails
 	 */
-	public List<Instruction> readInstructions() throws IOException {
+	public @NonNull List<Instruction> readInstructions() throws IOException {
 		if (!file.exists()) {
 			throw new IOException("File does not exist");
 		}

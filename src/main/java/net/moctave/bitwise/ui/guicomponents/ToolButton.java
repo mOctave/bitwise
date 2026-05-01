@@ -13,22 +13,25 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import net.moctave.bitwise.ui.commands.Command;
 import net.moctave.bitwise.utils.Constants;
 
 /** A button used in the toolbar of the GUI. */
 public class ToolButton extends JButton {
-	private final Command cmd;
+	private final @NonNull Command cmd;
 
 	// MARK: Constructor
 	/**
 	 * Creates a new tool button with the given command and keybind using the icon at the
 	 * selected path relative to ./img/
 	 * @param icon the path of the icon for this button
-	 * @param keybind a keystroke that can also be used to trigger this button's command
+	 * @param keybind a keystroke that can also be used to trigger this button's command, or null
 	 * @param cmd the command this button executes when pressed
 	 */
-	public ToolButton(String icon, KeyStroke keybind, Command cmd) {
+	public ToolButton(@NonNull String icon, @Nullable KeyStroke keybind, @NonNull Command cmd) {
 		super();
 		this.cmd = cmd;
 
@@ -60,7 +63,7 @@ public class ToolButton extends JButton {
 		 * Runs the command associated with this button.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			cmd.run();
 		}
 	}

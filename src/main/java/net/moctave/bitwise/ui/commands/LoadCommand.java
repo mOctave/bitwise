@@ -3,6 +3,8 @@ package net.moctave.bitwise.ui.commands;
 import java.io.File;
 import java.io.IOException;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.exceptions.OperationCancelledException;
 import net.moctave.bitwise.model.Computer;
@@ -16,7 +18,7 @@ public class LoadCommand extends Command {
 	 * Creates a new LoadCommand with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public LoadCommand(UserInterface ui) {
+	public LoadCommand(@NonNull UserInterface ui) {
 		super(ui);
 	}
 

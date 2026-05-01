@@ -6,7 +6,10 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+import org.jspecify.annotations.NullMarked;
+
 /** A class holding constants to be used by across multiple parts of the program. */
+@NullMarked
 public abstract class Constants {
 	// MARK: Hex Digits
 	/** An array of hex digits used to represent binary numbers. */

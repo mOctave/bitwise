@@ -25,6 +25,8 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.InstructionParseException;
 import net.moctave.bitwise.exceptions.LabelNotFoundException;
 import net.moctave.bitwise.exceptions.OperationCancelledException;
@@ -43,21 +45,21 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	// MARK: Fields
 	private int selectedIndex;
 
-	private JToolBar menuBar;
-	private JPanel mainPanel;
+	private @NonNull JToolBar menuBar;
+	private @NonNull JPanel mainPanel;
 
-	private JPanel instructionPanel;
-	private JScrollPane instructionScroll;
+	private @NonNull JPanel instructionPanel;
+	private @NonNull JScrollPane instructionScroll;
 
-	private JTextArea machineCodePanel;
-	private JScrollPane machineCodeScroll;
+	private @NonNull JTextArea machineCodePanel;
+	private @NonNull JScrollPane machineCodeScroll;
 
 
-	private JPanel rightPanel;
-	private JPanel statePanel;
-	private JTextPane infoPanel;
-	private JScrollPane infoScroll;
-	private JLabel statusBar;
+	private @NonNull JPanel rightPanel;
+	private @NonNull JPanel statePanel;
+	private @NonNull JTextPane infoPanel;
+	private @NonNull JScrollPane infoScroll;
+	private @NonNull JLabel statusBar;
 
 	// MARK: Constructor
 	/**
@@ -243,7 +245,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	}
 
 	@Override
-	public Instruction seekInstruction() throws InstructionParseException {
+	public @NonNull Instruction seekInstruction() throws InstructionParseException {
 		InstructionPicker picker = new InstructionPicker();
 		try {
 			return picker.getSelectedInstruction();
@@ -253,7 +255,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	}
 
 	@Override
-	public File seekFile(boolean saveMode) throws OperationCancelledException {
+	public @NonNull File seekFile(boolean saveMode) throws OperationCancelledException {
 		JFileChooser chooser = new JFileChooser("./data");
 		int click = JFileChooser.ERROR_OPTION;
 		if (saveMode) {
@@ -328,7 +330,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	}
 
 	@Override
-	public void showInformation(String msg) {
+	public void showInformation(@NonNull String msg) {
 		infoPanel.setText(msg);
 	}
 

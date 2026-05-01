@@ -3,6 +3,8 @@ package net.moctave.bitwise.ui.commands;
 import java.io.File;
 import java.io.IOException;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.OperationCancelledException;
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.persistence.DataConverter;
@@ -15,7 +17,7 @@ public class SaveCommand extends Command {
 	 * Creates a new SaveCommand with the given user interface.
 	 * @param ui the specific UI this command is linked to
 	 */
-	public SaveCommand(UserInterface ui) {
+	public SaveCommand(@NonNull UserInterface ui) {
 		super(ui);
 	}
 

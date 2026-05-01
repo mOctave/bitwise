@@ -1,5 +1,7 @@
 package net.moctave.bitwise.utils;
 
+import org.jspecify.annotations.NonNull;
+
 /** A class of helper methods used to convert between data formats. */
 public abstract class Conversion {
 	/**
@@ -7,7 +9,7 @@ public abstract class Conversion {
 	 * @param b the byte to convert
 	 * @return a string representation of the byte
 	 */
-	public static String toHexString(byte b) {
+	public static @NonNull String toHexString(byte b) {
 		char leading = Constants.HEX_DIGITS[(b >>> 4) & 0xF];
 		char trailing = Constants.HEX_DIGITS[b & 0xF];
 		return String.format("%s%s", leading, trailing);

@@ -12,18 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.exceptions.OperationCancelledException;
 import net.moctave.bitwise.model.instructions.*;
 
 /** A modal dialog that allows you to pick an instruction. */
 public class InstructionPicker extends JDialog {
-	private FunctionPicker functionPicker;
-	private RegisterPicker regAPicker;
-	private RegisterPicker regBPicker;
-	private TextPicker labelPicker;
-	private TextPicker valCPicker;
-	private JButton okayButton;
-	private JButton cancelButton;
+	private @NonNull FunctionPicker functionPicker;
+	private @NonNull RegisterPicker regAPicker;
+	private @NonNull RegisterPicker regBPicker;
+	private @NonNull TextPicker labelPicker;
+	private @NonNull TextPicker valCPicker;
+	private @NonNull JButton okayButton;
+	private @NonNull JButton cancelButton;
 	private boolean didCancel;
 
 	// MARK: Constructor
@@ -46,7 +48,7 @@ public class InstructionPicker extends JDialog {
 	 * @return the instruction chosen by the user
 	 * @throws OperationCancelledException if the dialog was closed without choosing an instruction
 	 */
-	public Instruction getSelectedInstruction() throws OperationCancelledException {
+	public @NonNull Instruction getSelectedInstruction() throws OperationCancelledException {
 		if (didCancel) {
 			throw new OperationCancelledException();
 		}
@@ -69,7 +71,8 @@ public class InstructionPicker extends JDialog {
 	 * @param valC the valC value of the instruction, unbounded
 	 * @return the instruction associated with the chosen arguments
 	 */
-	private Instruction buildInstruction(String instructionType, int regA, int regB, String label, String valC) {
+	private @NonNull Instruction buildInstruction(@NonNull String instructionType, int regA, int regB, String label,
+				String valC) {
 		switch (instructionType) {
 			case "halt": return new HaltInstruction();
 			case "move": return new MoveInstruction(regA, Integer.parseInt(valC));
@@ -142,7 +145,7 @@ public class InstructionPicker extends JDialog {
 	 * @param fill the initial fill value
 	 * @return appropraite constraints for an element on the right panel
 	 */
-	private GridBagConstraints makeRightPanelConstraints(int gridy, int weighty, int fill) {
+	private @NonNull GridBagConstraints makeRightPanelConstraints(int gridy, int weighty, int fill) {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridy = gridy;
 		constraints.weightx = 1;
@@ -160,7 +163,7 @@ public class InstructionPicker extends JDialog {
 		 * Closes the instruction picker.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			setVisible(false);
 		}
 	}
@@ -171,7 +174,7 @@ public class InstructionPicker extends JDialog {
 		 * Marks that selection was cancelled, then closes the instruction picker.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			didCancel = true;
 			setVisible(false);
 		}

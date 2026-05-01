@@ -15,7 +15,7 @@ public abstract class Instruction {
 	private int regA;
 	private int regB;
 	private int valC;
-	@Nullable private String label;
+	private @Nullable String label;
 	private boolean isLabel;
 
 
@@ -129,8 +129,7 @@ public abstract class Instruction {
 	 * 
 	 * @return A byte-list representation of this instruction
 	 */
-	@NonNull
-	public abstract List<Byte> asBytes();
+	public abstract @NonNull List<Byte> asBytes();
 
 
 	/**
@@ -139,8 +138,7 @@ public abstract class Instruction {
 	 * @return A string representation of the assembly code for this instruction
 	 */
 	@Override
-	@NonNull
-	public abstract String toString();
+	public abstract @NonNull String toString();
 
 	/**
 	 * Determines the number of bytes this instruction takes in machine code.

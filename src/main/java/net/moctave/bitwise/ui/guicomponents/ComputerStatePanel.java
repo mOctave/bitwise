@@ -7,6 +7,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.model.Register;
 import net.moctave.bitwise.utils.Constants;
@@ -48,7 +50,7 @@ public class ComputerStatePanel extends JPanel {
 	 * @param g the graphics object for this component
 	 */
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(@NonNull Graphics g) {
 		super.paintComponent(g);
 
 		g.setColor(Color.BLACK);
@@ -63,7 +65,7 @@ public class ComputerStatePanel extends JPanel {
 	 * Paints the labels for the various boxes on the panel.
 	 * @param g the graphics object for this component
 	 */
-	private void paintHeaders(Graphics g) {
+	private void paintHeaders(@NonNull Graphics g) {
 		FontMetrics metrics = g.getFontMetrics(Constants.FONT_BOLD);
 		g.setFont(Constants.FONT_BOLD);
 
@@ -80,7 +82,7 @@ public class ComputerStatePanel extends JPanel {
 	 * Draws the background boxes for the panel.
 	 * @param g the graphics object for this component
 	 */
-	private void paintRectangles(Graphics g) {
+	private void paintRectangles(@NonNull Graphics g) {
 		// Border
 		g.setColor(Constants.COLOR_BLUE);
 		g.drawRect(1, 1, WIDTH - 2, HEIGHT - 2);
@@ -112,7 +114,7 @@ public class ComputerStatePanel extends JPanel {
 	 * Renders all the register labels and values on the panel.
 	 * @param g the graphics object for this component
 	 */
-	private void paintRegisters(Graphics g) {
+	private void paintRegisters(@NonNull Graphics g) {
 		Computer computer = Computer.getInstance();
 		for (int i = 0; i < 15; i++) {
 			if (i >= 8) {
@@ -143,7 +145,7 @@ public class ComputerStatePanel extends JPanel {
 	 * Renders a single register on the panel.
 	 * @param g the graphics object for this component
 	 */
-	private void paintRegister(Graphics g, Register register, int x, int y, int spacing) {
+	private void paintRegister(@NonNull Graphics g, @NonNull Register register, int x, int y, int spacing) {
 		g.setFont(Constants.FONT_MONOSPACED);
 		g.drawString(register.getName() + ": ", x, y);
 		g.drawString(register.valueAsString(), x + spacing, y);
@@ -155,7 +157,7 @@ public class ComputerStatePanel extends JPanel {
 	 * Renders decorative elements on the panel.
 	 * @param g the graphics object for this component
 	 */
-	private void paintDecorativeElements(Graphics g) {
+	private void paintDecorativeElements(@NonNull Graphics g) {
 		g.setColor(Constants.COLOR_GREY);
 		g.drawOval(4, 4, 3, 3);
 		g.drawOval(WIDTH - 7, 4, 3, 3);

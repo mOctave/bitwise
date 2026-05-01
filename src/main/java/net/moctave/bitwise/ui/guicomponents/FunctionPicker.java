@@ -8,17 +8,19 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import org.jspecify.annotations.NonNull;
+
 import net.moctave.bitwise.utils.Constants;
 
 /** A pane with buttons allowing the user to select a function and opcode. */
 public class FunctionPicker extends InstructionPickerComponent {
-	private final InstructionPickerComponent regAPicker;
-	private final InstructionPickerComponent regBPicker;
-	private final InstructionPickerComponent labelPicker;
-	private final InstructionPickerComponent valCPicker;
+	private final @NonNull InstructionPickerComponent regAPicker;
+	private final @NonNull InstructionPickerComponent regBPicker;
+	private final @NonNull InstructionPickerComponent labelPicker;
+	private final @NonNull InstructionPickerComponent valCPicker;
 
-	private String choice;
-	private List<JButton> buttons;
+	private @NonNull String choice;
+	private @NonNull List<JButton> buttons;
 
 	// MARK: Constructor
 	/**
@@ -29,8 +31,9 @@ public class FunctionPicker extends InstructionPickerComponent {
 	 * @param labelPicker the component to enable iff an instruction has a label component
 	 * @param valCPicker the component to enable iff an instruction has a valC component
 	 */
-	public FunctionPicker(String label, InstructionPickerComponent regAPicker, InstructionPickerComponent regBPicker,
-			InstructionPickerComponent labelPicker, InstructionPickerComponent valCPicker) {
+	public FunctionPicker(@NonNull String label, @NonNull InstructionPickerComponent regAPicker,
+			@NonNull InstructionPickerComponent regBPicker, @NonNull InstructionPickerComponent labelPicker,
+			@NonNull InstructionPickerComponent valCPicker) {
 		super(label);
 		this.regAPicker = regAPicker;
 		this.regBPicker = regBPicker;
@@ -84,7 +87,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 	 * @param hasLabel whether the label selector should be enabled
 	 * @param hasC whether the valC selector should be enabled
 	 */
-	private void addButton(String label, boolean hasA, boolean hasB,
+	private void addButton(@NonNull String label, boolean hasA, boolean hasB,
 			boolean hasLabel, boolean hasC) {
 		JButton button = new JButton(label);
 		buttons.add(button);
@@ -116,7 +119,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 	// MARK: ActionListeners
 	/** An action listener for the function selection buttons. */
 	private class FunctionButtonListener implements ActionListener {
-		private final String label;
+		private final @NonNull String label;
 		private final boolean hasA;
 		private final boolean hasB;
 		private final boolean hasLabel;
@@ -130,7 +133,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 		 * @param hasLabel whether the label selector should be enabled
 		 * @param hasC whether the valC selector should be enabled
 		 */
-		public FunctionButtonListener(String label, boolean hasA, boolean hasB,
+		public FunctionButtonListener(@NonNull String label, boolean hasA, boolean hasB,
 				boolean hasLabel, boolean hasC) {
 			this.label = label;
 			this.hasA = hasA;
@@ -144,7 +147,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 		 * and updates the fonts of the buttons to match the new selection.
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(@NonNull ActionEvent e) {
 			choice = label;
 			regAPicker.setEnabled(hasA);
 			regBPicker.setEnabled(hasB);
