@@ -43,7 +43,7 @@ public class CommandLineInterface implements UserInterface {
 		initCommandMap();
 		while (true) {
 			System.out.print(">>> ");
-			String command = scanner.nextLine().toLowerCase();
+			final String command = scanner.nextLine().toLowerCase();
 			Command nextCommand = commands.get(command);
 			if (nextCommand == null) {
 				nextCommand = helpCommand;
@@ -93,7 +93,7 @@ public class CommandLineInterface implements UserInterface {
 
 	@Override
 	public void showAssembly() {
-		Computer computer = Computer.getInstance();
+		final Computer computer = Computer.getInstance();
 		for (int i = 0; i < computer.getInstructions().size(); i++) {
 			System.out.printf("%-4s %s%n", i + 1, computer.getInstructions().get(i).toString());
 		}
@@ -101,7 +101,7 @@ public class CommandLineInterface implements UserInterface {
 
 	@Override
 	public void showMachineCode() throws LabelNotFoundException {
-		List<Byte> bytes = Computer.getInstance().asByteList();
+		final List<Byte> bytes = Computer.getInstance().asByteList();
 		for (int i = 0; i < bytes.size(); i++) {
 			System.out.print(Conversion.toHexString(bytes.get(i)) + " ");
 			if (i % 16 == 15) {
@@ -115,7 +115,7 @@ public class CommandLineInterface implements UserInterface {
 
 	@Override
 	public void showState() {
-		Computer computer = Computer.getInstance();
+		final Computer computer = Computer.getInstance();
 		System.out.println("STATUS:");
 		System.out.printf("%s   %s | Flags: %s   %s   %s%n",
 				represent(computer.getProgramCounter()), represent(computer.getNextProgramCounter()),
@@ -130,11 +130,12 @@ public class CommandLineInterface implements UserInterface {
 					represent(computer.getValC()), represent(computer.getValWrite())
 		);
 		System.out.println("--Registers--");
-		Register[] registers = computer.getRegisters();
+		final Register[] registers = computer.getRegisters();
 		for (int i = 0; i < 3; i++) {
-			System.out.printf("%s  %s  %s  %s  %s%n",
-					represent(registers[i * 5]), represent(registers[i * 5 + 1]), represent(registers[i * 5 + 2]),
-						 represent(registers[i * 5 + 3]), represent(registers[i * 5 + 4])
+			System.out.printf(
+				"%s  %s  %s  %s  %s%n",
+				represent(registers[i * 5]), represent(registers[i * 5 + 1]), represent(registers[i * 5 + 2]),
+				represent(registers[i * 5 + 3]), represent(registers[i * 5 + 4])
 			);
 		}
 		System.out.println("--------");
@@ -142,6 +143,7 @@ public class CommandLineInterface implements UserInterface {
 
 	/**
 	 * Represents the given register with its label and value string.
+	 * 
 	 * @param r the register to represent
 	 * @return the labelled representation of the register
 	 */

@@ -12,7 +12,7 @@ public class HaltInstruction extends Instruction {
 	 * Creates a new HaltInstruction with all other options set to 0, null, or false.
 	 */
 	public HaltInstruction() {
-		super(0,0,0,0,0,null, false);
+		super(0, 0, 0, 0, 0, null, false);
 	}
 
 

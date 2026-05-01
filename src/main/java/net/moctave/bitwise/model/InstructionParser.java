@@ -11,10 +11,14 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A class with helper methods to convert given lines of manually-entered text to instructions. */
 public abstract class InstructionParser {
+	// TODO: Switch to using Set.of() instead of this complicated mess.
+	/** The instructions the computer recognizes as binary. */
 	public static final @NonNull List<String> BINARY_INSTRUCTIONS =
 			Arrays.asList(new String[]{"copy", "add", "sub", "and", "or", "xor"});
+	/** The instructions the computer recognizes as unary. */
 	public static final @NonNull List<String> UNARY_INSTRUCTIONS =
 			Arrays.asList(new String[]{"inc", "neg", "not"});
+	/** The instructions the computer recognizes as jump instructions. */
 	public static final @NonNull List<String> JUMP_INSTRUCTIONS =
 			Arrays.asList(new String[]{"jump", "je", "jle", "jge", "jne", "jl", "jg"});
 
@@ -23,6 +27,7 @@ public abstract class InstructionParser {
 	// MARK: Methods
 	/**
 	 * Converts a given line of input to an instruction.
+	 * 
 	 * @param line the line to parse
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
@@ -34,7 +39,7 @@ public abstract class InstructionParser {
 			return new Label(convertToLabel(line));
 		}
 
-		String type = line.split(" ")[0].toLowerCase();
+		final String type = line.split(" ")[0].toLowerCase();
 
 		if (type.equals("halt")) {
 			return new HaltInstruction();
@@ -53,6 +58,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Converts a given line of input to a move instruction.
+	 * 
 	 * @param line the line to parse
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
@@ -60,8 +66,8 @@ public abstract class InstructionParser {
 	private static @NonNull MoveInstruction convertToMoveInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
-			String regAText = line.split(" ")[1].toLowerCase();
-			String valCText = line.split(" ")[2].toLowerCase();
+			final String regAText = line.split(" ")[1].toLowerCase();
+			final String valCText = line.split(" ")[2].toLowerCase();
 			return new MoveInstruction(convertToRegisterAddress(regAText), convertToInteger(valCText));
 		} catch (IndexOutOfBoundsException e) {
 			throw new InstructionParseException("Malformed move instruction.");
@@ -70,6 +76,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Converts a given line of input to a binary ALU instruction.
+	 * 
 	 * @param line the line to parse
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
@@ -77,16 +84,24 @@ public abstract class InstructionParser {
 	protected static @NonNull BinaryInstruction convertToBinaryInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
-			String type = line.split(" ")[0].toLowerCase();
-			int regA = convertToRegisterAddress(line.split(" ")[1].toLowerCase());
-			int regB = convertToRegisterAddress(line.split(" ")[2].toLowerCase());
+			final String type = line.split(" ")[0].toLowerCase();
+			final int regA = convertToRegisterAddress(line.split(" ")[1].toLowerCase());
+			final int regB = convertToRegisterAddress(line.split(" ")[2].toLowerCase());
 			switch (type) {
-				case "copy": return new CopyInstruction(regA, regB);
-				case "add":  return new AddInstruction(regA, regB);
-				case "sub":  return new SubInstruction(regA, regB);
-				case "and":  return new AndInstruction(regA, regB);
-				case "or":   return new OrInstruction(regA, regB);
-				case "xor":  return new XorInstruction(regA, regB);
+				case "copy":
+					return new CopyInstruction(regA, regB);
+				case "add":
+					return new AddInstruction(regA, regB);
+				case "sub":
+					return new SubInstruction(regA, regB);
+				case "and":
+					return new AndInstruction(regA, regB);
+				case "or":
+					return new OrInstruction(regA, regB);
+				case "xor":
+					return new XorInstruction(regA, regB);
+				default:
+					throw new InstructionParseException("Instruction miscategorized as binary.");
 			}
 		} catch (IndexOutOfBoundsException e) {
 			// Intentionally left blank
@@ -96,6 +111,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Converts a given line of input to a unary ALU instruction.
+	 * 
 	 * @param line the line to parse
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
@@ -103,12 +119,17 @@ public abstract class InstructionParser {
 	protected static @NonNull UnaryInstruction convertToUnaryInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
-			String type = line.split(" ")[0].toLowerCase();
-			int regA = convertToRegisterAddress(line.split(" ")[1].toLowerCase());
+			final String type = line.split(" ")[0].toLowerCase();
+			final int regA = convertToRegisterAddress(line.split(" ")[1].toLowerCase());
 			switch (type) {
-				case "inc": return new IncInstruction(regA);
-				case "neg": return new NegInstruction(regA);
-				case "not": return new NotInstruction(regA);
+				case "inc":
+					return new IncInstruction(regA);
+				case "neg":
+					return new NegInstruction(regA);
+				case "not":
+					return new NotInstruction(regA);
+				default:
+					throw new InstructionParseException("Instruction miscategorized as unary.");
 			}
 		} catch (IndexOutOfBoundsException e) {
 			// Intentionally left blank
@@ -118,6 +139,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Converts a given line of input to a jump instruction.
+	 * 
 	 * @param line the line to parse
 	 * @return the appropriate corresponding instruction
 	 * @throws InstructionParseException if no suitable, well-formed instruction is found.
@@ -125,16 +147,25 @@ public abstract class InstructionParser {
 	protected static @NonNull JumpInstruction convertToJumpInstruction(@NonNull String line)
 			throws InstructionParseException {
 		try {
-			String type = line.split(" ")[0].toLowerCase();
-			String label = line.split(" ", 2)[1].toLowerCase();
+			final String type = line.split(" ")[0].toLowerCase();
+			final String label = line.split(" ", 2)[1].toLowerCase();
 			switch (type) {
-				case "jump": return new JumpAlwaysInstruction(label);
-				case "je": return new JumpEqualsInstruction(label);
-				case "jle": return new JumpLessEqualsInstruction(label);
-				case "jge": return new JumpGreaterEqualsInstruction(label);
-				case "jne": return new JumpNotEqualsInstruction(label);
-				case "jl": return new JumpLessInstruction(label);
-				case "jg": return new JumpGreaterInstruction(label);
+				case "jump":
+					return new JumpAlwaysInstruction(label);
+				case "je":
+					return new JumpEqualsInstruction(label);
+				case "jle":
+					return new JumpLessEqualsInstruction(label);
+				case "jge":
+					return new JumpGreaterEqualsInstruction(label);
+				case "jne":
+					return new JumpNotEqualsInstruction(label);
+				case "jl":
+					return new JumpLessInstruction(label);
+				case "jg":
+					return new JumpGreaterInstruction(label);
+				default:
+					throw new InstructionParseException("Instruction miscategorized as binary.");
 			}
 		} catch (IndexOutOfBoundsException e) {
 			// Intentionally left blank
@@ -145,6 +176,7 @@ public abstract class InstructionParser {
 	/**
 	 * Converts a given string in the form "rX" to the appropriate integer matching
 	 * the hex digit X.
+	 * 
 	 * @param text the string to parse
 	 * @return the register address represented by the string
 	 * @throws InstructionParseException if the string cannot be parsed to an integer.
@@ -152,7 +184,7 @@ public abstract class InstructionParser {
 	private static int convertToRegisterAddress(@NonNull String text)
 			throws InstructionParseException {
 		try {
-			char hexChar = text.toUpperCase().toCharArray()[1];
+			final char hexChar = text.toUpperCase().toCharArray()[1];
 			for (int i = 1; i < Constants.HEX_DIGITS.length; i++) {
 				if (Constants.HEX_DIGITS[i] == hexChar) {
 					return i;
@@ -167,6 +199,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Converts a given string in the form "X" to the appropriate integer X.
+	 * 
 	 * @param text the string to parse
 	 * @return the integer represented by the string
 	 * @throws InstructionParseException if the string cannot be parsed to an integer.
@@ -182,6 +215,7 @@ public abstract class InstructionParser {
 
 	/**
 	 * Sanitizes a given string and returns it as label text.
+	 * 
 	 * @param text the string to parse to a label (must contain a colon)
 	 * @return the label stored in the string
 	 * @throws InstructionParseException if the string cannot be parsed to a label.

@@ -10,6 +10,7 @@ public class NotInstruction extends UnaryInstruction {
 	/**
 	 * Creates a new NotInstruction with opCode 3, fnCode 2, given regA,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param regA the regA value for this instruction, bounded on [1, 15]
 	 */
 	public NotInstruction(int regA) {

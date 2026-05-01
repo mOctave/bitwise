@@ -8,6 +8,7 @@ public class JumpAlwaysInstruction extends JumpInstruction {
 	/**
 	 * Creates a new JumpAlwaysInstruction with opCode 4, fnCode 0, given label,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param label the label for this instruction to jump to
 	 */
 	public JumpAlwaysInstruction(@NonNull String label) {

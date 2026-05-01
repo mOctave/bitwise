@@ -21,7 +21,8 @@ public abstract class Instruction {
 
 	// MARK: Constructor
 	/**
-	 * A constructor which provides full control over all an instruction's fields
+	 * A constructor which provides full control over all an instruction's fields.
+	 * 
 	 * @param opCode the operation code for the instruction, bounded on [0, 15]
 	 * @param fnCode the function code for the instruction, bounded on [0, 15]
 	 * @param regA the regA value for the instruction, bounded on [0, 15]
@@ -104,7 +105,7 @@ public abstract class Instruction {
 
 
 	/**
-	 * Returns a hash code for this instruction based on the values of all fields
+	 * Returns a hash code for this instruction based on the values of all fields.
 	 * 
 	 * @return An integer hash code
 	 */
@@ -125,7 +126,7 @@ public abstract class Instruction {
 
 
 	/**
-	 * Represents this instruction in machine code and returns the result as a list
+	 * Represents this instruction in machine code and returns the result as a list.
 	 * 
 	 * @return A byte-list representation of this instruction
 	 */
@@ -133,7 +134,7 @@ public abstract class Instruction {
 
 
 	/**
-	 * Represents this instruction in assembly and returns the result as a string
+	 * Represents this instruction in assembly and returns the result as a string.
 	 * 
 	 * @return A string representation of the assembly code for this instruction
 	 */
@@ -165,7 +166,7 @@ public abstract class Instruction {
 		if (label == null || isLabel) {
 			return;
 		} else {
-			Integer address = labelAddresses.get(label);
+			final Integer address = labelAddresses.get(label);
 			if (address == null) {
 				throw new LabelNotFoundException();
 			} else {
@@ -177,30 +178,65 @@ public abstract class Instruction {
 
 
 	// MARK: Getters
+	/**
+	 * Getter for this instruction's opcode.
+	 * 
+	 * @return {@link #opCode}
+	 */
 	public int getOpCode() {
 		return opCode;
 	}
 
+	/**
+	 * Getter for this instruction's function code.
+	 * 
+	 * @return {@link #fnCode}
+	 */
 	public int getFnCode() {
 		return fnCode;
 	}
 
+	/**
+	 * Getter for this instruction's regA value.
+	 * 
+	 * @return {@link #regA}
+	 */
 	public int getRegA() {
 		return regA;
 	}
 
+	/**
+	 * Getter for this instruction's regB value.
+	 * 
+	 * @return {@link #regB}
+	 */
 	public int getRegB() {
 		return regB;
 	}
 
+	/**
+	 * Getter for this instruction's valC value.
+	 * 
+	 * @return {@link #valC}
+	 */
 	public int getValC() {
 		return valC;
 	}
 
-	public String getLabel() {
+	/**
+	 * Getter for this instruction's label.
+	 * 
+	 * @return {@link #label}
+	 */
+	public @Nullable String getLabel() {
 		return label;
 	}
 
+	/**
+	 * Getter for whether or not this instruction is a label.
+	 * 
+	 * @return {@link #isLabel}
+	 */
 	public boolean isLabel() {
 		return isLabel;
 	}

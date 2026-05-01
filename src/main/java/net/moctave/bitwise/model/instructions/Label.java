@@ -11,10 +11,11 @@ public class Label extends Instruction {
 	/**
 	 * Creates a new label with opCode 5, the given label text,
 	 * isLabel set to true, and all other options set to 0, null, or false.
+	 * 
 	 * @param labelText the text of this label
 	 */
 	public Label(@NonNull String labelText) {
-		super(5,0,0,0,0, labelText, true);
+		super(5, 0, 0, 0, 0, labelText, true);
 	}
 
 

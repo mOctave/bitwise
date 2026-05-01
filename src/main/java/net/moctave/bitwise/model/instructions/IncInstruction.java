@@ -10,6 +10,7 @@ public class IncInstruction extends UnaryInstruction {
 	/**
 	 * Creates a new IncInstruction with opCode 3, fnCode 0, given regA,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param regA the regA value for this instruction, bounded on [1, 15]
 	 */
 	public IncInstruction(int regA) {

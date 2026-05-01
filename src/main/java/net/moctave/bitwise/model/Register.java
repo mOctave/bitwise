@@ -15,7 +15,8 @@ public class Register {
 
 	// MARK: Constructor
 	/**
-	 * Creates a new register with the given name and apparent size
+	 * Creates a new register with the given name and apparent size.
+	 * 
 	 * @param name The name associated with this register
 	 * @param size The apparent size of this register, in bits, between 1 and 32 inclusive
 	 */
@@ -29,7 +30,8 @@ public class Register {
 
 	// MARK: Methods
 	/**
-	 * Sets this register to a new value
+	 * Sets this register to a new value.
+	 * 
 	 * @param value The new value for this register
 	 */
 	public void setValue(int value) {
@@ -40,8 +42,9 @@ public class Register {
 
 	/**
 	 * Represents the value stored in the register as a string of hex
-	 * digits, limited by the apparent size
-	 * @returns A string representation of the value stored in this register
+	 * digits, limited by the apparent size.
+	 * 
+	 * @return a string representation of the value stored in this register
 	 */
 	public @NonNull String valueAsString() {
 		String resultSoFar = "";
@@ -49,15 +52,15 @@ public class Register {
 		int parsedBits = 0;
 
 		while (parsedBits + 4 <= getSize()) {
-			int hexDigit = valueRemaining & 0xF;
+			final int hexDigit = valueRemaining & 0xF;
 			resultSoFar = Constants.HEX_DIGITS[hexDigit] + resultSoFar;
 			valueRemaining = valueRemaining >>> 4;
 			parsedBits += 4;
 		}
 
-		int bitsLeft = getSize() - parsedBits;
+		final int bitsLeft = getSize() - parsedBits;
 		if (bitsLeft > 0) {
-			int hexDigit = valueRemaining & ((int) Math.pow(2, bitsLeft) - 1);
+			final int hexDigit = valueRemaining & ((int) Math.pow(2, bitsLeft) - 1);
 			resultSoFar = Constants.HEX_DIGITS[hexDigit] + resultSoFar;
 		}
 
@@ -67,14 +70,29 @@ public class Register {
 
 
 	// MARK: Getters
+	/**
+	 * Getter for this register's name.
+	 * 
+	 * @return {@link #name}
+	 */
 	public @NonNull String getName() {
 		return name;
 	}
 
+	/**
+	 * Getter for this register's value.
+	 * 
+	 * @return {@link #value}
+	 */
 	public int getValue() {
 		return value;
 	}
 
+	/**
+	 * Getter for this register's apparent size.
+	 * 
+	 * @return {@link #size}
+	 */
 	public int getSize() {
 		return size;
 	}

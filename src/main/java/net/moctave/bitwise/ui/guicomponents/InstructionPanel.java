@@ -31,6 +31,7 @@ public class InstructionPanel extends JPanel {
 	/**
 	 * Creates a new instruction panel with a button that reflects the instruction
 	 * stored at the given index.
+	 * 
 	 * @param index an index corresponding to the index of an actual instruction
 	 * stored in the computer
 	 * @param gui the user interface this panel is a part of
@@ -96,7 +97,7 @@ public class InstructionPanel extends JPanel {
 
 	// MARK: ActionListeners
 	/** A listener that selects this instruction. */
-	private class SelectButtonListener implements ActionListener {
+	private final class SelectButtonListener implements ActionListener {
 		/**
 		 * Selects the index of the associated instruction panel.
 		 */

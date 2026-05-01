@@ -9,6 +9,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class ResetCommand extends Command {
 	/**
 	 * Creates a new ResetCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public ResetCommand(@NonNull UserInterface ui) {

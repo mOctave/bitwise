@@ -9,6 +9,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class DisplayMachineCommand extends Command {
 	/**
 	 * Creates a new DisplayMachineCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public DisplayMachineCommand(@NonNull UserInterface ui) {

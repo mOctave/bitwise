@@ -15,22 +15,35 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A panel that shows the current state of the computer. */
 public class ComputerStatePanel extends JPanel {
+	/** The width of this panel. */
 	public static final int WIDTH = 300;
+	/** The height of this panel. */
 	public static final int HEIGHT = 430;
+	/** The vertical offset between lines on this panel. */
 	public static final int LINE_OFFSET = 20;
 
 
+	/** The X-coordinate to start drawing data registers at. */
 	public static final int DATA_REG_X = 15;
+	/** The X-coordinate for the first column of control registers. */
 	public static final int CPU_REG_X1 = 15;
+	/** The X-coordinate for the second column of control registers. */
 	public static final int CPU_REG_X2 = 135;
+	/** The X-coordinate for the first flag. */
 	public static final int FLAG_X = WIDTH - 160;
+	/** The horizontal offset between flags. */
 	public static final int FLAG_X_OFFSET = 55;
 
+	/** The Y-coordinate to start drawing data registers at. */
 	public static final int DATA_REG_Y = 75;
+	/** The Y-coordinate to start drawing control registers at. */
 	public static final int CPU_REG_Y = DATA_REG_Y + 10 * LINE_OFFSET;
+	/** The Y-coordinate to start drawing flags at. */
 	public static final int FLAG_Y = CPU_REG_Y + 7 * LINE_OFFSET;
 
+	/** The default horizontal offset needed between registers. */
 	public static final int STANDARD_OFFSET = 20;
+	/** The horizontal offset needed between control registers. */
 	public static final int CONTROL_OFFSET = 80;
 
 	// MARK: Constructor
@@ -46,6 +59,7 @@ public class ComputerStatePanel extends JPanel {
 	// MARK: Methods
 	/**
 	 * Draws the state of all the registers.
+	 * 
 	 * @param g the graphics object for this component
 	 */
 	@Override
@@ -62,10 +76,11 @@ public class ComputerStatePanel extends JPanel {
 
 	/**
 	 * Paints the labels for the various boxes on the panel.
+	 * 
 	 * @param g the graphics object for this component
 	 */
 	private void paintHeaders(@NonNull Graphics g) {
-		FontMetrics metrics = g.getFontMetrics(Constants.FONT_BOLD);
+		final FontMetrics metrics = g.getFontMetrics(Constants.FONT_BOLD);
 		g.setFont(Constants.FONT_BOLD);
 
 		g.drawString("Computer State", WIDTH / 2 - metrics.stringWidth("Computer State") / 2, 20);
@@ -79,6 +94,7 @@ public class ComputerStatePanel extends JPanel {
 
 	/**
 	 * Draws the background boxes for the panel.
+	 * 
 	 * @param g the graphics object for this component
 	 */
 	private void paintRectangles(@NonNull Graphics g) {
@@ -111,10 +127,11 @@ public class ComputerStatePanel extends JPanel {
 
 	/**
 	 * Renders all the register labels and values on the panel.
+	 * 
 	 * @param g the graphics object for this component
 	 */
 	private void paintRegisters(@NonNull Graphics g) {
-		Computer computer = Computer.getInstance();
+		final Computer computer = Computer.getInstance();
 		for (int i = 0; i < 15; i++) {
 			if (i >= 8) {
 				paintRegister(g, computer.getRegisters()[i], DATA_REG_X + WIDTH / 2 - 10,
@@ -142,7 +159,13 @@ public class ComputerStatePanel extends JPanel {
 
 	/**
 	 * Renders a single register on the panel.
+	 * 
 	 * @param g the graphics object for this component
+	 * @param register the register to display
+	 * @param x the x coordinate to start painting at
+	 * @param y the y coordinate to start painting at
+	 * @param spacing the distance between the start of the register's name
+	 * and the start of its value
 	 */
 	private void paintRegister(@NonNull Graphics g, @NonNull Register register, int x, int y, int spacing) {
 		g.setFont(Constants.FONT_MONOSPACED);
@@ -154,6 +177,7 @@ public class ComputerStatePanel extends JPanel {
 
 	/**
 	 * Renders decorative elements on the panel.
+	 * 
 	 * @param g the graphics object for this component
 	 */
 	private void paintDecorativeElements(@NonNull Graphics g) {

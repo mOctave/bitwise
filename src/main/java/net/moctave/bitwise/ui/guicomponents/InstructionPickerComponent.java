@@ -20,12 +20,13 @@ public abstract class InstructionPickerComponent extends JPanel {
 	// MARK: Constructor
 	/**
 	 * Creates a new empty panel with the given label and a vertical box layout.
+	 * 
 	 * @param label the label to display above the component
 	 */
 	public InstructionPickerComponent(@NonNull String label) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JPanel headerPanel = new JPanel();
+		final JPanel headerPanel = new JPanel();
 		headerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 
 		header = new JLabel(label);
@@ -53,6 +54,11 @@ public abstract class InstructionPickerComponent extends JPanel {
 	}
 
 	// MARK: Getters
+	/**
+	 * Getter for this component's content panel.
+	 * 
+	 * @return {@link #content}
+	 */
 	public @NonNull JPanel getContent() {
 		return content;
 	}

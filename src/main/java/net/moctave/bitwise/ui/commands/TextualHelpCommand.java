@@ -12,6 +12,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class TextualHelpCommand extends Command {
 	/**
 	 * Creates a new TextualHelpCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public TextualHelpCommand(@NonNull UserInterface ui) {
@@ -22,7 +23,7 @@ public class TextualHelpCommand extends Command {
 	@Override
 	public void run() {
 		try {
-			String helpText = Files.readString(new File("./strings/helptext.txt").toPath());
+			final String helpText = Files.readString(new File("./strings/helptext.txt").toPath());
 			getUI().showInformation(helpText);
 			getUI().showOperationSuccess();
 		} catch (IOException e) {

@@ -10,6 +10,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class RunAllCommand extends Command {
 	/**
 	 * Creates a new RunAllCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public RunAllCommand(@NonNull UserInterface ui) {

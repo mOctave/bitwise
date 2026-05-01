@@ -12,6 +12,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class OverwriteInstructionCommand extends Command {
 	/**
 	 * Creates a new OverwriteInstructionCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public OverwriteInstructionCommand(@NonNull UserInterface ui) {
@@ -23,10 +24,10 @@ public class OverwriteInstructionCommand extends Command {
 	public void run() {
 		try {
 			getUI().showInformation("Please choose the address of the instruction to overwrite.");
-			int address = getUI().seekInstructionAddress();
+			final int address = getUI().seekInstructionAddress();
 			getUI().showInformation(String.format("Please provide an instruction to insert (Currently %s).%n",
 					Computer.getInstance().getInstructions().get(address).toString()));
-			Instruction instruction = getUI().seekInstruction();
+			final Instruction instruction = getUI().seekInstruction();
 			Computer.getInstance().setInstruction(address, instruction);
 			getUI().handleInstructionChange();
 			getUI().showInformation("Instruction overwritten.");

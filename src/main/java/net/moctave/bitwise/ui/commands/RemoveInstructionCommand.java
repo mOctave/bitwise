@@ -9,6 +9,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class RemoveInstructionCommand extends Command {
 	/**
 	 * Creates a new RemoveInstructionCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public RemoveInstructionCommand(@NonNull UserInterface ui) {
@@ -20,7 +21,7 @@ public class RemoveInstructionCommand extends Command {
 	public void run() {
 		try {
 			getUI().showInformation("Please choose the address of the instruction to remove.");
-			int address = getUI().seekInstructionAddress();
+			final int address = getUI().seekInstructionAddress();
 			Computer.getInstance().removeInstruction(address);
 			getUI().handleInstructionChange();
 			getUI().showInformation("Instruction removed.");

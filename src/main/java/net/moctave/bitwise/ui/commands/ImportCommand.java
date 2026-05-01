@@ -15,6 +15,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class ImportCommand extends Command {
 	/**
 	 * Creates a new ImportCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public ImportCommand(@NonNull UserInterface ui) {
@@ -25,10 +26,10 @@ public class ImportCommand extends Command {
 	@Override
 	public void run() {
 		try {
-			File file = getUI().seekFile(false);
-			FileManager fm = new FileManager(file);
+			final File file = getUI().seekFile(false);
+			final FileManager fm = new FileManager(file);
 
-			Computer computer = Computer.getInstance();
+			final Computer computer = Computer.getInstance();
 
 			computer.getInstructions().clear();
 			for (Instruction instruction : fm.readInstructions()) {

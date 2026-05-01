@@ -6,6 +6,7 @@ import org.jspecify.annotations.NonNull;
 public class InstructionParseException extends Exception {
 	/**
 	 * Creates an instruction parse exception with the given message.
+	 * 
 	 * @param message An error message explaining why instruction parsing failed
 	 */
 	public InstructionParseException(@NonNull String message) {

@@ -14,6 +14,7 @@ public class TextPicker extends InstructionPickerComponent {
 	// MARK: Constructor
 	/**
 	 * Creates a new text picker with the given label.
+	 * 
 	 * @param label the label to display above this picker
 	 */
 	public TextPicker(@NonNull String label) {
@@ -30,6 +31,7 @@ public class TextPicker extends InstructionPickerComponent {
 	// MARK: Methods
 	/**
 	 * Returns the text entered by the user.
+	 * 
 	 * @return the text currently in this field
 	 */
 	public @NonNull String getChoice() {

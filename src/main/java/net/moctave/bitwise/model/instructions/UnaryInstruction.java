@@ -11,6 +11,7 @@ public abstract class UnaryInstruction extends Instruction {
 	/**
 	 * Creates a new JumpInstruction with opCode 3, the given fnCode and regA,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param fnCode the function code for the specific unary operation to
 	 * perform, bounded on [0, 2]
 	 * @param regA the regA value for this instruction, bounded on [1, 15]

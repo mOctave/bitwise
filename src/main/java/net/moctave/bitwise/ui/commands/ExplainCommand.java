@@ -9,6 +9,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class ExplainCommand extends Command {
 	/**
 	 * Creates a new ExplainCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public ExplainCommand(@NonNull UserInterface ui) {

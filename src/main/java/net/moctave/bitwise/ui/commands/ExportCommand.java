@@ -14,6 +14,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class ExportCommand extends Command {
 	/**
 	 * Creates a new ExportCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public ExportCommand(@NonNull UserInterface ui) {
@@ -24,8 +25,8 @@ public class ExportCommand extends Command {
 	@Override
 	public void run() {
 		try {
-			File file = getUI().seekFile(true);
-			FileManager fm = new FileManager(file);
+			final File file = getUI().seekFile(true);
+			final FileManager fm = new FileManager(file);
 			fm.writeInstructions(Computer.getInstance().getInstructions());
 			getUI().showInformation("Instructions exported.");
 			getUI().showOperationSuccess();

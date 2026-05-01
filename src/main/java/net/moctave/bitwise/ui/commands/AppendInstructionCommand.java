@@ -12,6 +12,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class AppendInstructionCommand extends Command {
 	/**
 	 * Creates a new AppendInstructionCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public AppendInstructionCommand(@NonNull UserInterface ui) {
@@ -23,7 +24,7 @@ public class AppendInstructionCommand extends Command {
 	public void run() {
 		try {
 			getUI().showInformation("Please provide an instruction to append.");
-			Instruction instruction = getUI().seekInstruction();
+			final Instruction instruction = getUI().seekInstruction();
 			Computer.getInstance().addInstruction(instruction);
 			getUI().handleInstructionChange();
 			getUI().showInformation("Instruction appended.");

@@ -10,6 +10,7 @@ public class CopyInstruction extends BinaryInstruction {
 	/**
 	 * Creates a new CopyInstruction with opCode 2, fnCode 0, given regA and
 	 * regB, and all other options set to 0, null, or false.
+	 * 
 	 * @param regA the regA value for this instruction, bounded on [1, 15]
 	 * @param regB the regB value for this instruction, bounded on [1, 15]
 	 */

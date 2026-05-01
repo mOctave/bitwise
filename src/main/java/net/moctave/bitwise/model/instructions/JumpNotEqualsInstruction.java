@@ -8,6 +8,7 @@ public class JumpNotEqualsInstruction extends JumpInstruction {
 	/**
 	 * Creates a new JumpNotEqualsInstruction with opCode 4, fnCode 4, given label,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param label the label for this instruction to jump to
 	 */
 	public JumpNotEqualsInstruction(@NonNull String label) {

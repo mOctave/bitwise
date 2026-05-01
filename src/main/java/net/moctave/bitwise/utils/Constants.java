@@ -57,14 +57,14 @@ public abstract class Constants {
 	public static final Color COLOR_BLUE = new Color(13, 121, 242);
 
 	// MARK: Standard Border
-	private static final int inner = 1;
-	private static final int outer = 1;
+	private static final int INNER = 1;
+	private static final int OUTER = 1;
 	/** A border to be shared by GUI components. */
 	public static final Border BORDER_STANDARD = BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(inner, inner, inner, inner),
+			BorderFactory.createEmptyBorder(INNER, INNER, INNER, INNER),
 			BorderFactory.createCompoundBorder(
 					BorderFactory.createLineBorder(COLOR_GREY),
-					BorderFactory.createEmptyBorder(outer, outer, outer, outer)
+					BorderFactory.createEmptyBorder(OUTER, OUTER, OUTER, OUTER)
 			)
 	);
 }

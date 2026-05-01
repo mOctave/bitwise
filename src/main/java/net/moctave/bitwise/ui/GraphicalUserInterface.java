@@ -79,7 +79,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	 * Adds all the necessary buttons to the menu bar.
 	 */
 	private void initMenuBar() {
-		int meta = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
+		final int meta = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
 		menuBar = new JToolBar();
 		menuBar.add(new ToolButton("append.png", KeyStroke.getKeyStroke("A"), new AppendInstructionCommand(this)));
 		menuBar.add(new ToolButton("insert.png", null, new InsertInstructionCommand(this)));
@@ -127,7 +127,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 		instructionScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		instructionScroll.setBorder(Constants.BORDER_STANDARD);
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 0;
 		constraints.weightx = 1;
@@ -152,7 +152,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 		machineCodeScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		machineCodeScroll.setBorder(Constants.BORDER_STANDARD);
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 1;
 		constraints.weightx = 1;
@@ -175,7 +175,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 		initInfoPanel();
 		initStatusBar();
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 2;
 		constraints.weightx = 0;
@@ -191,7 +191,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	private void initStatePanel() {
 		statePanel = new ComputerStatePanel();
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.NONE;
 		constraints.gridy = 0;
 		constraints.weighty = 0;
@@ -211,7 +211,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 		infoScroll.setBorder(new EmptyBorder(0, 0, 0, 0));
 
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridy = 1;
 		constraints.weighty = 1;
@@ -225,7 +225,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	private void initStatusBar() {
 		statusBar = new JLabel("[Nothing Going On]", SwingConstants.CENTER);
 
-		GridBagConstraints constraints = new GridBagConstraints();
+		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridy = 2;
 		constraints.weighty = 0;
@@ -246,7 +246,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 
 	@Override
 	public @NonNull Instruction seekInstruction() throws InstructionParseException {
-		InstructionPicker picker = new InstructionPicker();
+		final InstructionPicker picker = new InstructionPicker();
 		try {
 			return picker.getSelectedInstruction();
 		} catch (NumberFormatException e) {
@@ -256,7 +256,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 
 	@Override
 	public @NonNull File seekFile(boolean saveMode) throws OperationCancelledException {
-		JFileChooser chooser = new JFileChooser("./data");
+		final JFileChooser chooser = new JFileChooser("./data");
 		int click = JFileChooser.ERROR_OPTION;
 		if (saveMode) {
 			click = chooser.showSaveDialog(this);
@@ -273,8 +273,8 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 
 	@Override
 	public void showAssembly() {
-		int totalInstructions = Computer.getInstance().getInstructions().size();
-		Component[] components = instructionPanel.getComponents().clone();
+		final int totalInstructions = Computer.getInstance().getInstructions().size();
+		final Component[] components = instructionPanel.getComponents().clone();
 		int i = 0;
 		for (Component c : components) {
 			if (c instanceof InstructionPanel) {
@@ -298,6 +298,9 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 	}
 
 
+	/**
+	 * Updates all the components of this user interface.
+	 */
 	public void updateAllComponents() {
 		for (Component c : instructionPanel.getComponents()) {
 			if (c instanceof InstructionPanel) {
@@ -310,7 +313,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 
 	@Override
 	public void showMachineCode() throws LabelNotFoundException {
-		List<Byte> bytes = Computer.getInstance().asByteList();
+		final List<Byte> bytes = Computer.getInstance().asByteList();
 		String rsf = "";
 		for (int i = 0; i < bytes.size(); i++) {
 			rsf += Conversion.toHexString(bytes.get(i)) + " ";
@@ -362,10 +365,20 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 
 
 	// MARK: Getters / Setters
+	/**
+	 * Getter for this GUI's selected instruction index.
+	 * 
+	 * @return {@link #selectedIndex}
+	 */
 	public int getSelectedIndex() {
 		return selectedIndex;
 	}
 
+	/**
+	 * Setter for this GUI's selected instruction index.
+	 * 
+	 * @param selectedIndex value for {@link #selectedIndex}
+	 */
 	public void setSelectedIndex(int selectedIndex) {
 		this.selectedIndex = selectedIndex;
 	}

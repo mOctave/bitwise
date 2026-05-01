@@ -18,6 +18,7 @@ public interface UserInterface {
 
 	/**
 	 * Prompts the user to choose an instruction address, and returns the parsed integer.
+	 * 
 	 * @return an integer chosen by the user
 	 * @throws NumberFormatException if user input is unparseable
 	 */
@@ -25,6 +26,7 @@ public interface UserInterface {
 
 	/**
 	 * Prompts the user to enter an instruction, and returns the parsed instruction.
+	 * 
 	 * @return an instruction chosen by the user
 	 * @throws InstructionParseException if user input is unparseable
 	 */
@@ -34,6 +36,8 @@ public interface UserInterface {
 	 * Prompts the user to select a file. If saveMode is enabled, any file will do, otherwise
 	 * only files that actually exist should be selectable in implementations of UserInterface that
 	 * support file browsing.
+	 * 
+	 * @param saveMode true if the file will be written to, false if it must be read from
 	 * @return a file chosen by the user
 	 */
 	public abstract @NonNull File seekFile(boolean saveMode);
@@ -45,6 +49,7 @@ public interface UserInterface {
 
 	/**
 	 * Displays the current instructions stored in the computer in assembly format.
+	 * 
 	 * @throws LabelNotFoundException if instructions cannot be compiled due to
 	 * issues with labels
 	 */
@@ -57,6 +62,7 @@ public interface UserInterface {
 
 	/**
 	 * Displays the given message to the user.
+	 * 
 	 * @param msg the message to display
 	 */
 	public abstract void showInformation(@NonNull String msg);

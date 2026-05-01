@@ -8,6 +8,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class DisplayStateCommand extends Command {
 	/**
 	 * Creates a new DisplayStateCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public DisplayStateCommand(@NonNull UserInterface ui) {

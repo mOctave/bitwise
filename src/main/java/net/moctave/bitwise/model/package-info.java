@@ -1,4 +1,3 @@
-
 /**
  * This package contains the core model code for Bitwise, including
  * the computer model, registers, and (in a subpackage) instructions.

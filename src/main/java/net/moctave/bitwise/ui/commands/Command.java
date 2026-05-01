@@ -13,6 +13,7 @@ public abstract class Command {
 	// MARK: Constructor
 	/**
 	 * Creates a new command with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public Command(@NonNull UserInterface ui) {
@@ -28,6 +29,11 @@ public abstract class Command {
 
 
 	// MARK: Getters
+	/**
+	 * Getter for this command instance's user interface.
+	 * 
+	 * @return {@link #ui}
+	 */
 	public @NonNull UserInterface getUI() {
 		return ui;
 	}

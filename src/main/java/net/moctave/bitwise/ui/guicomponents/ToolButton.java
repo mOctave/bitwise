@@ -26,7 +26,8 @@ public class ToolButton extends JButton {
 	// MARK: Constructor
 	/**
 	 * Creates a new tool button with the given command and keybind using the icon at the
-	 * selected path relative to ./img/
+	 * selected path relative to {@code ./img/}.
+	 * 
 	 * @param icon the path of the icon for this button
 	 * @param keybind a keystroke that can also be used to trigger this button's command, or null
 	 * @param cmd the command this button executes when pressed
@@ -38,13 +39,13 @@ public class ToolButton extends JButton {
 		setBorder(Constants.BORDER_STANDARD);
 
 		try {
-			BufferedImage img = ImageIO.read(new File("./img/" + icon));
+			final BufferedImage img = ImageIO.read(new File("./img/" + icon));
 			setIcon(new ImageIcon(img.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		ToolButtonListener action = new ToolButtonListener();
+		final ToolButtonListener action = new ToolButtonListener();
 
 		if (keybind != null) {
 			registerKeyboardAction(action, keybind, JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -57,7 +58,7 @@ public class ToolButton extends JButton {
 	
 	// MARK: ActionListeners
 	/** A hook to run the command for this button. */
-	private class ToolButtonListener extends AbstractAction {
+	private final class ToolButtonListener extends AbstractAction {
 		/**
 		 * Runs the command associated with this button.
 		 */

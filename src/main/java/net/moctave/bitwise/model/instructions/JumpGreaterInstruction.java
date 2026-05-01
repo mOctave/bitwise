@@ -8,6 +8,7 @@ public class JumpGreaterInstruction extends JumpInstruction {
 	/**
 	 * Creates a new JumpGreaterInstruction with opCode 4, fnCode 6, given label,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param label the label for this instruction to jump to
 	 */
 	public JumpGreaterInstruction(@NonNull String label) {

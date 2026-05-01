@@ -3,25 +3,12 @@
 		"-//Puppy Crawl//DTD Check Configuration 1.3//EN"
 		"http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--
-	Checkstyle configuration that checks the Google coding conventions from Google Java Style
-	that can be found at https://google.github.io/styleguide/javaguide.html.
-	Checkstyle is very configurable. Be sure to read the documentation at
-	http://checkstyle.sf.net (or in your downloaded distribution).
-	To completely disable a check, just comment it out or delete it from the file.
-	Authors: Max Vetrenko, Ruslan Diachenko, Roman Ivanov.
- -->
 
-<module name = "Checker">
+<module name="Checker">
 	<property name="charset" value="UTF-8"/>
-
 	<property name="severity" value="error"/>
-
 	<property name="tabWidth" value="4"/>
-
 	<property name="fileExtensions" value="java, properties, xml"/>
-
-	<module name="SuppressWarningsFilter"/>
 
 	<!--Use Unix line endings-->
 	<module name="LineEnding"/>
@@ -50,9 +37,6 @@
 
 		<!--Anonymous inner classes should not exceed 20 lines in length-->
 		<module name="AnonInnerLength"/>
-
-		<!--Arrays that span multiple lines should have trailing commas-->
-		<module name="ArrayTrailingComma"/>
 
 		<!--All arrays should be defined in Java style (eg int[] arr rather than int arr[])-->
 		<module name="ArrayTypeStyle"/>
@@ -102,8 +86,14 @@
 		<!--Any class with an equals() method should override equals(Object)-->
 		<module name="CovariantEquals"/>
 
-		<!--No method should have more than 9 decision points-->
-		<module name="CyclomaticComplexity"/>
+		<!--
+		It's okay to have complex methods, but it's flagged because they
+		will be harder to test
+		-->
+		<module name="CyclomaticComplexity">
+			<property name="severity" value="warning"/>
+			<message key="cyclomaticComplexity" value="Cyclomatic Complexity is {0,number,integer}. This may make testing difficult, so it is recommended to reduce it to {1,number,integer} if possible."/>
+		</module>
 
 		<!--
 		Declarations should follow the following order:
@@ -226,9 +216,6 @@
 		<!--Method type parameter names should be a single uppercase letter-->
 		<module name="MethodTypeParameterName"/>
 
-		<!--All non-abstract classes should define an explicit constructor-->
-		<module name="MissingCtor"/>
-
 		<!--
 		Either both the @Deprecated annotation and @deprecated Javadoc tag should
 		be present, or neither.
@@ -340,9 +327,19 @@
 			<property name="tokens" value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT"/>
 		</module>
 
-		<!--When wrapping, separators should be placed on the new line-->
+		<!--
+		When wrapping, place the following at the end of the line:
+		commas, array declarators, semicolons, and ellipses
+		Place the following at the beginning of the next line:
+		 @, ::, and dots
+		-->
+		<module name="SeparatorWrap">
+			<property name="option" value="eol"/>
+			<property name="tokens" value="COMMA, ARRAY_DECLARATOR, SEMI, ELLIPSIS"/>
+		</module>
 		<module name="SeparatorWrap">
 			<property name="option" value="nl"/>
+			<property name="tokens" value="DOT, AT, METHOD_REF"/>
 		</module>
 
 		<!--Simplify boolean expressions-->
@@ -357,9 +354,6 @@
 
 		<!--String literals should be compared with equals() rather than ==-->
 		<module name="StringLiteralEquality"/>
-
-		<!--End Javadoc summary sentences with a period-->
-		<module name="SummaryJavadoc"/>
 
 		<!--Use Google style for formatting text blocks-->
 		<module name="TextBlockGoogleStyleFormatting"/>

@@ -15,6 +15,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class SaveCommand extends Command {
 	/**
 	 * Creates a new SaveCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public SaveCommand(@NonNull UserInterface ui) {
@@ -25,8 +26,8 @@ public class SaveCommand extends Command {
 	@Override
 	public void run() {
 		try {
-			File file = getUI().seekFile(true);
-			FileManager fm = new FileManager(file);
+			final File file = getUI().seekFile(true);
+			final FileManager fm = new FileManager(file);
 			fm.writeState(DataConverter.serialize(Computer.getInstance()));
 			getUI().showInformation("State saved.");
 			getUI().showOperationSuccess();

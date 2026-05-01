@@ -10,6 +10,7 @@ public class XorInstruction extends BinaryInstruction {
 	/**
 	 * Creates a new XorInstruction with opCode 2, fnCode 5, given regA and
 	 * regB, and all other options set to 0, null, or false.
+	 * 
 	 * @param regA the regA value for this instruction, bounded on [1, 15]
 	 * @param regB the regB value for this instruction, bounded on [1, 15]
 	 */

@@ -16,6 +16,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class LoadCommand extends Command {
 	/**
 	 * Creates a new LoadCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public LoadCommand(@NonNull UserInterface ui) {
@@ -25,8 +26,8 @@ public class LoadCommand extends Command {
 	@Override
 	public void run() {
 		try {
-			File file = getUI().seekFile(false);
-			FileManager fm = new FileManager(file);
+			final File file = getUI().seekFile(false);
+			final FileManager fm = new FileManager(file);
 			Computer.setInstance(DataConverter.deserialize(fm.readState()));
 			getUI().handleInstructionChange();
 			getUI().showInformation("State loaded.");

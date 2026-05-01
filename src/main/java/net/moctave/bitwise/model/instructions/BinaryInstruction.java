@@ -11,6 +11,7 @@ public abstract class BinaryInstruction extends Instruction {
 	/**
 	 * Creates a new JumpInstruction with opCode 2, the given fnCode, regA, and
 	 * regB, and all other options set to 0, null, or false.
+	 * 
 	 * @param fnCode the function code for the specific binary operation to
 	 * perform, bounded on [0, 5]
 	 * @param regA the regA value for this instruction, bounded on [1, 15]

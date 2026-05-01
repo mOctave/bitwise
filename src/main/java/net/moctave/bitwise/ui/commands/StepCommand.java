@@ -11,6 +11,7 @@ import net.moctave.bitwise.ui.UserInterface;
 public class StepCommand extends Command {
 	/**
 	 * Creates a new StepCommand with the given user interface.
+	 * 
 	 * @param ui the specific UI this command is linked to
 	 */
 	public StepCommand(@NonNull UserInterface ui) {

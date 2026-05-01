@@ -25,6 +25,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 	// MARK: Constructor
 	/**
 	 * Creates a new function picker with the function "halt" selected and the given label.
+	 * 
 	 * @param label the label to display above this picker
 	 * @param regAPicker the component to enable iff an instruction has a regA component
 	 * @param regBPicker the component to enable iff an instruction has a regB component
@@ -81,6 +82,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 
 	/**
 	 * Creates a new button to set the instruction type and editability of the various pickers.
+	 * 
 	 * @param label the label for the button
 	 * @param hasA whether the regA selector should be enabled
 	 * @param hasB whether the regB selector should be enabled
@@ -89,7 +91,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 	 */
 	private void addButton(@NonNull String label, boolean hasA, boolean hasB,
 			boolean hasLabel, boolean hasC) {
-		JButton button = new JButton(label);
+		final JButton button = new JButton(label);
 		buttons.add(button);
 		button.addActionListener(new FunctionButtonListener(label, hasA, hasB, hasLabel, hasC));
 		getContent().add(button);
@@ -110,6 +112,11 @@ public class FunctionPicker extends InstructionPickerComponent {
 	}
 
 	// MARK: Getters
+	/**
+	 * Getter for this function picker's selected choice.
+	 * 
+	 * @return {@link #choice}
+	 */
 	public String getChoice() {
 		return choice;
 	}
@@ -127,6 +134,7 @@ public class FunctionPicker extends InstructionPickerComponent {
 
 		/**
 		 * Constructs a new button listener with the given parameters.
+		 * 
 		 * @param label the label for the button
 		 * @param hasA whether the regA selector should be enabled
 		 * @param hasB whether the regB selector should be enabled

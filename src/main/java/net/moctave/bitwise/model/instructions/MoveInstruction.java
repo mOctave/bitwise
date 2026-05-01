@@ -13,18 +13,19 @@ public class MoveInstruction extends Instruction {
 	/**
 	 * Creates a new JumpInstruction with opCode 1, the given regA and valC,
 	 * and all other options set to 0, null, or false.
+	 * 
 	 * @param regA the regA value for this instruction, bounded on [1, 15]
 	 * @param valC the valC value for this instruction (unbounded)
 	 */
 	public MoveInstruction(int regA, int valC) {
-		super(1,0,regA,0,valC,null, false);
+		super(1, 0, regA, 0, valC, null, false);
 	}
 
 
 	// MARK: Methods
 	@Override
 	public @NonNull List<Byte> asBytes() {
-		int valC = getValC();
+		final int valC = getValC();
 
 		return Arrays.asList(new Byte[]{
 			(byte) ((getOpCode() << 4) + getRegA()),

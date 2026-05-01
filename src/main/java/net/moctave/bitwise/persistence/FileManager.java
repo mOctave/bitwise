@@ -22,6 +22,7 @@ public class FileManager {
 	// MARK: Constructor
 	/**
 	 * Creates a new FileManager for the given file.
+	 * 
 	 * @param file the file to manage
 	 */
 	public FileManager(@NonNull File file) {
@@ -33,6 +34,7 @@ public class FileManager {
 	/**
 	 * Writes a given JSON object to this FileManager's file.
 	 * Overwrites anything already stored there.
+	 * 
 	 * @param object the object to write
 	 * @throws IOException if the operation fails
 	 */
@@ -41,7 +43,7 @@ public class FileManager {
 			throw new IOException("Attempted to write to an abnormal file (eg, a directory)");
 		}
 
-		FileWriter fw = new FileWriter(file, false);
+		final FileWriter fw = new FileWriter(file, false);
 		fw.write(object.toString());
 		fw.close();
 	}
@@ -49,6 +51,7 @@ public class FileManager {
 
 	/**
 	 * Reads this FileManager's file and converts it to a JSON object.
+	 * 
 	 * @return the JSON object stored in this file
 	 * @throws IOException if the operation fails
 	 */
@@ -61,7 +64,7 @@ public class FileManager {
 			throw new IOException("Attempted to read from an abnormal file (eg, a directory)");
 		}
 
-		Scanner s = new Scanner(file);
+		final Scanner s = new Scanner(file);
 		String rsf = "";
 		while (s.hasNextLine()) {
 			rsf += s.nextLine();
@@ -74,6 +77,7 @@ public class FileManager {
 	/**
 	 * Writes a given list of assembly instructions to this FileManager's file.
 	 * Overwrites anything already stored there.
+	 * 
 	 * @param instructions the list of instructions to write
 	 * @throws IOException if the operation fails
 	 */
@@ -82,7 +86,7 @@ public class FileManager {
 			throw new IOException("Attempted to write to an abnormal file (eg, a directory)");
 		}
 
-		FileWriter fw = new FileWriter(file, false);
+		final FileWriter fw = new FileWriter(file, false);
 		for (Instruction instruction : instructions) {
 			fw.write(instruction.toString());
 			fw.write(System.lineSeparator());
@@ -93,6 +97,7 @@ public class FileManager {
 
 	/**
 	 * Reads this FileManager's file and converts it to a list of instructions.
+	 * 
 	 * @return the list of instructions stored in this file
 	 * @throws IOException if the operation fails
 	 */
@@ -105,10 +110,10 @@ public class FileManager {
 			throw new IOException("Attempted to read from an abnormal file (eg, a directory)");
 		}
 
-		List<Instruction> instructions = new ArrayList<>();
+		final List<Instruction> instructions = new ArrayList<>();
 
 		try {
-			Scanner s = new Scanner(file);
+			final Scanner s = new Scanner(file);
 			while (s.hasNextLine()) {
 				instructions.add(InstructionParser.convertToInstruction(s.nextLine()));
 			}
@@ -122,6 +127,11 @@ public class FileManager {
 
 
 	// MARK: Getters
+	/**
+	 * Getter for this file manager's file.
+	 * 
+	 * @return {@link #file}
+	 */
 	public File getFile() {
 		return file;
 	}

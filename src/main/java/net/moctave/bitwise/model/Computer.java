@@ -65,7 +65,8 @@ public class Computer {
 
 
 	/**
-	 * Creates a new computer with the given values stored in each field or register
+	 * Creates a new computer with the given values stored in each field or register.
+	 * 
 	 * @param ocVal The value to store in opCode, bounded on [0, 15]
 	 * @param fcVal The value to store in fnCode, bounded on [0, 15]
 	 * @param raVal The value to store in regA, bounded on [0, 15]
@@ -85,8 +86,8 @@ public class Computer {
 	 * @param regVals A list of fifteen integer values to store in the standard registers
 	 */
 	public Computer(int ocVal, int fcVal, int raVal, int rbVal, int rwVal, int vaVal, int vbVal, int vcVal, int vwVal,
-				int pcVal, int npcVal, int fzVal, int fnVal, int foVal, @NonNull List<Instruction> instructions, int nextStep,
-				@NonNull List<Integer> regVals) {
+				int pcVal, int npcVal, int fzVal, int fnVal, int foVal, @NonNull List<Instruction> instructions,
+				int nextStep, @NonNull List<Integer> regVals) {
 		this();
 		opCode.setValue(ocVal);
 		fnCode.setValue(fcVal);
@@ -113,14 +114,14 @@ public class Computer {
 
 	// MARK: Methods
 	/**
-	 * Converts all the instructions in this computer to machine code
+	 * Converts all the instructions in this computer to machine code.
 	 * 
 	 * @return This computer's instructions, as a list of bytes
 	 * @throws LabelNotFoundException If a missing label is found in conversion
 	 */
 	public @NonNull List<Byte> asByteList() throws LabelNotFoundException {
 		updateAddressesToMatchLabels();
-		List<Byte> bytes = new ArrayList<>();
+		final List<Byte> bytes = new ArrayList<>();
 		for (Instruction instruction : instructions) {
 			for (Byte instructionByte : instruction.asBytes()) {
 				bytes.add(instructionByte);
@@ -158,6 +159,7 @@ public class Computer {
 
 	/**
 	 * Repeatedly steps until a halt instruction is reached.
+	 * 
 	 * @throws LabelNotFoundException if there's an error resolving a label when
 	 * interpreting the instructions
 	 */
@@ -172,6 +174,7 @@ public class Computer {
 	/**
 	 * Executes the next step of the instruction indicated by the program
 	 * counter.
+	 * 
 	 * @return true if execution should continue, or false if the current
 	 * instruction specifies halting
 	 * @throws LabelNotFoundException if there's an error resolving a label when
@@ -199,11 +202,12 @@ public class Computer {
 
 	/**
 	 * Conducts fetch/decode operations.
+	 * 
 	 * @return false if the end of the program is reached, otherwise true
 	 * @throws LabelNotFoundException if there's an error resolving labels
 	 */
 	private boolean fetchAndDecodeWithReturn() throws LabelNotFoundException {
-		int instructionLength = asByteList().size();
+		final int instructionLength = asByteList().size();
 		updateAddressesToMatchLabels();
 		if (programCounter.getValue() >= instructionLength) {
 			return false;
@@ -218,11 +222,12 @@ public class Computer {
 
 	/**
 	 * Updates all instructions to reflect the current label addresses.
+	 * 
 	 * @throws LabelNotFoundException if there's an error resolving labels
 	 */
 	private void updateAddressesToMatchLabels() throws LabelNotFoundException {
 		int address = 0;
-		Map<String, Integer> labels = new HashMap<>();
+		final Map<String, Integer> labels = new HashMap<>();
 
 		for (Instruction instruction : instructions) {
 			if (instruction.isLabel()) {
@@ -240,11 +245,12 @@ public class Computer {
 	/**
 	 * Conducts fetch/decode operations for the instruction indicated by the
 	 * program counter.
+	 * 
 	 * @throws LabelNotFoundException if there's an error resolving labels
 	 */
 	private void fetchAndDecode() throws LabelNotFoundException {
-		List<Byte> byteList = asByteList();
-		int pcValue = programCounter.getValue();
+		final List<Byte> byteList = asByteList();
+		final int pcValue = programCounter.getValue();
 		opCode.setValue(byteList.get(pcValue) >>> 4);
 		switch (opCode.getValue()) {
 			case 0:
@@ -259,16 +265,18 @@ public class Computer {
 			case 3:
 				fetchAndDecodeCaseUnary(byteList, pcValue);
 				break;
-			default:
+			case 4:
 				fetchAndDecodeCaseJump(byteList, pcValue);
 				break;
-			// No other cases are possible
+			default:
+				throw new UnsupportedOperationException("Impossible case");
 		}
 		fetchAndDecodeValueAssignment();
 	}
 
 	/**
 	 * Conducts fetch/decode operations for a halt instruction.
+	 * 
 	 * @throws LabelNotFoundException if there's an error resolving labels
 	 */
 	private void fetchAndDecodeCaseHalt() {
@@ -280,6 +288,7 @@ public class Computer {
 
 	/**
 	 * Conducts fetch/decode operations for a move instruction.
+	 * 
 	 * @param byteList The list of instructions in machine code format 
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
@@ -296,6 +305,7 @@ public class Computer {
 
 	/**
 	 * Conducts fetch/decode operations for a binary ALU instruction.
+	 * 
 	 * @param byteList The list of instructions in machine code format 
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
@@ -311,6 +321,7 @@ public class Computer {
 
 	/**
 	 * Conducts fetch/decode operations for a unary ALU instruction.
+	 * 
 	 * @param byteList The list of instructions in machine code format 
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
@@ -326,6 +337,7 @@ public class Computer {
 
 	/**
 	 * Conducts fetch/decode operations for a jump instruction.
+	 * 
 	 * @param byteList The list of instructions in machine code format 
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
@@ -423,8 +435,8 @@ public class Computer {
 	 * (3) the value to be stored in the O flag
 	 */
 	public static int[] moveMathResult(int valC) {
-		int valZ = (valC == 0) ? 1 : 0;
-		int valN = (valC < 0) ? 1 : 0;
+		final int valZ = (valC == 0) ? 1 : 0;
+		final int valN = (valC < 0) ? 1 : 0;
 		return new int[]{valC, valZ, valN, 0};
 	}
 
@@ -463,7 +475,11 @@ public class Computer {
 			case 4:
 				result = valA | valB;
 				break;
-			case 5: result = valA ^ valB;
+			case 5:
+				result = valA ^ valB;
+				break;
+			default:
+				throw new UnsupportedOperationException("Impossible case");
 		}
 		return new int[]{result, (result == 0) ? 1 : 0, (result < 0) ? 1 : 0, valO};
 	}
@@ -508,10 +524,13 @@ public class Computer {
 				break;
 			case 2:
 				result = ~valA;
+				break;
+			default:
+				throw new UnsupportedOperationException("Impossible case");
 		}
 
-		int valZ = (result == 0) ? 1 : 0;
-		int valN = (result < 0) ? 1 : 0;
+		final int valZ = (result == 0) ? 1 : 0;
+		final int valN = (result < 0) ? 1 : 0;
 		return new int[]{result, valZ, valN, valO};
 	}
 
@@ -527,9 +546,9 @@ public class Computer {
 	 * @return True if the computer should branch, false otherwise
 	 */
 	public static boolean shouldBranch(int function, int intZ, int intN, int intO) {
-		boolean valZ = (intZ > 0);
-		boolean valN = (intN > 0);
-		boolean valO = (intO > 0);
+		final boolean valZ = (intZ > 0);
+		final boolean valN = (intN > 0);
+		final boolean valO = (intO > 0);
 		return (function == 0) // jump
 				|| (function == 1 && (valZ)) // je
 				|| (function == 2 && (valZ || (valN ^ valO))) // jle
@@ -542,6 +561,7 @@ public class Computer {
 
 	/**
 	 * Converts four bytes to a single 32-bit value. Little-endian.
+	 * 
 	 * @param byte1 The first (most significant) byte
 	 * @param byte2 The second byte
 	 * @param byte3 The third byte
@@ -549,17 +569,18 @@ public class Computer {
 	 * @return The integer obtained from the four bytes.
 	 */
 	private int unpackInteger(byte byte1, byte byte2, byte byte3, byte byte4) {
-		int int1 = byte1 & 0xFF;
-		int int2 = byte2 & 0xFF;
-		int int3 = byte3 & 0xFF;
-		int int4 = byte4 & 0xFF;
+		final int int1 = byte1 & 0xFF;
+		final int int2 = byte2 & 0xFF;
+		final int int3 = byte3 & 0xFF;
+		final int int4 = byte4 & 0xFF;
 		return (int1 << 24) + (int2 << 16) + (int3 << 8) + int4;
 	}
 
 
 	// MARK: List Helpers
 	/**
-	 * Adds an instruction to the end of the list
+	 * Adds an instruction to the end of the list.
+	 * 
 	 * @param instruction the instruction to add
 	 */
 	public void addInstruction(Instruction instruction) {
@@ -567,7 +588,8 @@ public class Computer {
 	}
 
 	/**
-	 * Adds an instruction at the given index
+	 * Adds an instruction at the given index.
+	 * 
 	 * @param i the index to add the instruction at
 	 * @param instruction the instruction to add
 	 */
@@ -576,7 +598,8 @@ public class Computer {
 	}
 
 	/**
-	 * Replaces the instruction at the given index
+	 * Replaces the instruction at the given index.
+	 * 
 	 * @param i the index of the instruction to replace
 	 * @param instruction the new instruction to add
 	 */
@@ -585,7 +608,8 @@ public class Computer {
 	}
 
 	/**
-	 * Removes the instruction at the given index
+	 * Removes the instruction at the given index.
+	 * 
 	 * @param i the index of the instruction to remove
 	 */
 	public void removeInstruction(int i) {
@@ -595,78 +619,174 @@ public class Computer {
 
 
 	// MARK: Getters / Setters
+	/**
+	 * Getter for this computer's main instance.
+	 * 
+	 * @return {@link #instance}
+	 */
 	public static @NonNull Computer getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Setter for this computer's main instance.
+	 * 
+	 * @param c value for {@link #instance}
+	 */
 	public static void setInstance(Computer c) {
 		instance = c;
 	}
 
+	/**
+	 * Getter for this computer's opcode register.
+	 * 
+	 * @return {@link #opCode}
+	 */
 	public @NonNull Register getOpCode() {
 		return opCode;
 	}
 
+	/**
+	 * Getter for this computer's function code register.
+	 * 
+	 * @return {@link #fnCode}
+	 */
 	public @NonNull Register getFnCode() {
 		return fnCode;
 	}
 
+	/**
+	 * Getter for this computer's regA register.
+	 * 
+	 * @return {@link #regA}
+	 */
 	public @NonNull Register getRegA() {
 		return regA;
 	}
 
+	/**
+	 * Getter for this computer's regB register.
+	 * 
+	 * @return {@link #regB}
+	 */
 	public @NonNull Register getRegB() {
 		return regB;
 	}
 
+	/**
+	 * Getter for this computer's regWrite register.
+	 * 
+	 * @return {@link #regWrite}
+	 */
 	public @NonNull Register getRegWrite() {
 		return regWrite;
 	}
 
+	/**
+	 * Getter for this computer's valA register.
+	 * 
+	 * @return {@link #valA}
+	 */
 	public @NonNull Register getValA() {
 		return valA;
 	}
 
+	/**
+	 * Getter for this computer's valB register.
+	 * 
+	 * @return {@link #valB}
+	 */
 	public @NonNull Register getValB() {
 		return valB;
 	}
 
+	/**
+	 * Getter for this computer's valC register.
+	 * 
+	 * @return {@link #valC}
+	 */
 	public @NonNull Register getValC() {
 		return valC;
 	}
 
+	/**
+	 * Getter for this computer's valWrite register.
+	 * 
+	 * @return {@link #valWrite}
+	 */
 	public @NonNull Register getValWrite() {
 		return valWrite;
 	}
 
+	/**
+	 * Getter for this computer's program counter.
+	 * 
+	 * @return {@link #programCounter}
+	 */
 	public @NonNull Register getProgramCounter() {
 		return programCounter;
 	}
 
+	/**
+	 * Getter for the register that store this computer's next
+	 * program counter value.
+	 * 
+	 * @return {@link #nextProgramCounter}
+	 */
 	public @NonNull Register getNextProgramCounter() {
 		return nextProgramCounter;
 	}
 
+	/**
+	 * Getter for this computer's Z flag.
+	 * 
+	 * @return {@link #flagZ}
+	 */
 	public @NonNull Register getFlagZ() {
 		return flagZ;
 	}
 
+	/**
+	 * Getter for this computer's N flag.
+	 * 
+	 * @return {@link #flagN}
+	 */
 	public @NonNull Register getFlagN() {
 		return flagN;
 	}
 
+	/**
+	 * Getter for this computer's O flag.
+	 * 
+	 * @return {@link #flagO}
+	 */
 	public @NonNull Register getFlagO() {
 		return flagO;
 	}
 
+	/**
+	 * Getter for this computer's instruction list.
+	 * 
+	 * @return {@link #instructions}
+	 */
 	public @NonNull List<Instruction> getInstructions() {
 		return instructions;
 	}
 
+	/**
+	 * Getter for this computer's next step.
+	 * 
+	 * @return {@link #nextStep}
+	 */
 	public int getNextStep() {
 		return nextStep;
 	}
 
+	/**
+	 * Getter for this computer's data registers.
+	 * 
+	 * @return {@link #registers}
+	 */
 	public @NonNull Register[] getRegisters() {
 		return registers;
 	}

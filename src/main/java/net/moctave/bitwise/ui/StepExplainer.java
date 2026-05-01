@@ -5,16 +5,17 @@ import org.jspecify.annotations.NullMarked;
 import net.moctave.bitwise.model.Computer;
 import net.moctave.bitwise.model.Register;
 
-// A class of helper methods for explaining the last step taken by the computer.
+/** A class of helper methods for explaining the last step taken by the computer. */
 @NullMarked
 public abstract class StepExplainer {
 	// MARK: Explain Last Step
 	/**
 	 * Explains the last step taken by the computer.
+	 * 
 	 * @return an explanation of the last step
 	 */
 	public static String explainLastStep() {
-		Computer computer = Computer.getInstance();
+		final Computer computer = Computer.getInstance();
 		switch (computer.getNextStep()) {
 			case 0:
 				return explainFetchDecodeStep(computer);
@@ -34,6 +35,7 @@ public abstract class StepExplainer {
 	// MARK: Explain No Step
 	/**
 	 * Explains that no step has yet been taken by a computer.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -48,13 +50,14 @@ public abstract class StepExplainer {
 	// MARK: Explain Fetch/Decode
 	/**
 	 * Explains the fetch/decode step just taken by a computer.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
 	private static String explainFetchDecodeStep(Computer computer) {
 		String rsf = String.format("FETCH/DECODE%n");
-		String vasPC = vas(computer.getProgramCounter());
-		String vasOC = vas(computer.getOpCode());
+		final String vasPC = vas(computer.getProgramCounter());
+		final String vasOC = vas(computer.getOpCode());
 		rsf += String.format("The computer began by reading the byte at %s.%n", vasPC);
 		rsf += String.format("The first four bits, %s, were stored in opCode.%n", vasOC);
 		rsf += String.format("Since the value in opCode was %s, ", vasOC);
@@ -66,12 +69,13 @@ public abstract class StepExplainer {
 
 	/**
 	 * Describes how the computer handled the bytes after the opcode.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
 	private static String describeBytesRead(Computer computer) {
 		String rsf = "";
-		String fnStr = vas(computer.getFnCode());
+		final String fnStr = vas(computer.getFnCode());
 		switch (computer.getOpCode().getValue()) {
 			case 0:
 				return String.format("the computer halted execution immediately.%n");
@@ -97,6 +101,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Describes the registers that the computer set to a standard value.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -124,6 +129,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Describes the values the computer loaded into valA and valB.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -153,12 +159,13 @@ public abstract class StepExplainer {
 	// MARK: Explain ALU Step
 	/**
 	 * Explains the ALU step just taken by a computer.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
 	private static String explainArithmeticStep(Computer computer) {
 		String rsf = String.format("EXECUTE%n");
-		int opCode = computer.getOpCode().getValue();
+		final int opCode = computer.getOpCode().getValue();
 		if (opCode < 1 || opCode > 3) {
 			rsf += "Since the value of opCode was not 1, 2, or 3, the computer had";
 			rsf += String.format(" no ALU operations to perform. Flag values were preserved.%n");
@@ -171,6 +178,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Explains the steps taken to arrive at the value of valWrite.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -189,6 +197,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Explains the binary operation used to arrive at the value of valWrite.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -211,6 +220,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Explains the unary operation used to arrive at the value of valWrite.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -227,6 +237,7 @@ public abstract class StepExplainer {
 
 	/**
 	 * Explains how the computer's flags were set.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -262,17 +273,18 @@ public abstract class StepExplainer {
 	// MARK: Explain Branch
 	/**
 	 * Explains the branch step just taken by a computer.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
 	private static String explainBranchStep(Computer computer) {
 		String rsf = String.format("BRANCH%n");
-		int opCode = computer.getOpCode().getValue();
-		int fnCode = computer.getFnCode().getValue();
-		int valZ = computer.getFlagZ().getValue();
-		int valN = computer.getFlagN().getValue();
-		int valO = computer.getFlagO().getValue();
-		String vasVC = vas(computer.getValC());
+		final int opCode = computer.getOpCode().getValue();
+		final int fnCode = computer.getFnCode().getValue();
+		final int valZ = computer.getFlagZ().getValue();
+		final int valN = computer.getFlagN().getValue();
+		final int valO = computer.getFlagO().getValue();
+		final String vasVC = vas(computer.getValC());
 		if (opCode != 4) {
 			rsf += String.format("Since the value of opCode was not 4, branching was ignored.%n");
 		} else if (Computer.shouldBranch(fnCode, valZ, valN, valO)) {
@@ -290,6 +302,7 @@ public abstract class StepExplainer {
 	// MARK: Explain Memory Write
 	/**
 	 * Explains the memory write step just taken by a computer.
+	 * 
 	 * @param computer the computer being explained
 	 * @return an explanation of the last step
 	 */
@@ -298,8 +311,8 @@ public abstract class StepExplainer {
 		if (computer.getRegWrite().getValue() == 0) {
 			rsf += String.format("Since regWrite was 0, the computer did not write to any register.%n");
 		} else {
-			String vasRW = vas(computer.getRegWrite());
-			String vasVW = vas(computer.getValWrite());
+			final String vasRW = vas(computer.getRegWrite());
+			final String vasVW = vas(computer.getValWrite());
 			rsf += String.format("Since regWrite was %s, the computer wrote valWrite, %s to r%s.%n",
 					vasRW, vasVW, vasRW);
 		}
@@ -313,6 +326,7 @@ public abstract class StepExplainer {
 	// MARK: Helpers
 	/**
 	 * Calls {@link Register#valueAsString()} on the given register.
+	 * 
 	 * @param r the register being represented
 	 * @return a string representation of the value in the given register
 	 */

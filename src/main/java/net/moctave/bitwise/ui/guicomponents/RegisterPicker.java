@@ -10,7 +10,7 @@ import org.jspecify.annotations.NonNull;
 
 import net.moctave.bitwise.utils.Constants;
 
-/** A pane with buttons allowing the user to select a register from 1-15. */
+/** A pane with buttons allowing the user to select a register from 1 to 15. */
 public class RegisterPicker extends InstructionPickerComponent {
 	private int choice = 1;
 	private @NonNull JButton[] buttons;
@@ -18,6 +18,7 @@ public class RegisterPicker extends InstructionPickerComponent {
 	// MARK: Constructor
 	/**
 	 * Creates a new register picker with r1 selected and the given label.
+	 * 
 	 * @param label the label to display above this picker
 	 */
 	public RegisterPicker(@NonNull String label) {
@@ -27,7 +28,7 @@ public class RegisterPicker extends InstructionPickerComponent {
 
 		buttons = new JButton[15];
 		for (int i = 1; i <= 15; i++) {
-			JButton button = new JButton(String.format("r%s", Constants.HEX_DIGITS[i]));
+			final JButton button = new JButton(String.format("r%s", Constants.HEX_DIGITS[i]));
 			buttons[i - 1] = button;
 
 			button.addActionListener(new RegisterButtonListener(i));
@@ -51,6 +52,11 @@ public class RegisterPicker extends InstructionPickerComponent {
 	}
 
 	// MARK: Getters
+	/**
+	 * Getter for this register picker's selected choice.
+	 * 
+	 * @return {@link #choice}
+	 */
 	public int getChoice() {
 		return choice;
 	}
@@ -63,7 +69,8 @@ public class RegisterPicker extends InstructionPickerComponent {
 		private final int index;
 
 		/**
-		 * Constructs a new button listener for the given register
+		 * Constructs a new button listener for the given register.
+		 * 
 		 * @param index the register to be selected when the button is clicked
 		 */
 		public RegisterButtonListener(int index) {

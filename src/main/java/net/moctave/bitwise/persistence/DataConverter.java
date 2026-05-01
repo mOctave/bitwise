@@ -22,11 +22,12 @@ public abstract class DataConverter {
 	/**
 	 * Converts all the data stored in the computer to a single JSON
 	 * object ready to be written to a file.
+	 * 
 	 * @param computer the computer to convert to a JSON object
 	 * @return the corresponding JSON object
 	 */
 	public static @NonNull JSONObject serialize(@NonNull Computer computer) {
-		JSONObject object = new JSONObject();
+		final JSONObject object = new JSONObject();
 
 		object.put("version", 2);
 		object.put("opCode", computer.getOpCode().getValue());
@@ -55,6 +56,7 @@ public abstract class DataConverter {
 
 	/**
 	 * Converts the given JSON object back into a computer.
+	 * 
 	 * @param object the original JSON object
 	 * @return the deserialized computer state
 	 * @throws InstructionParseException if an error is encountered parsing instructions
@@ -69,9 +71,9 @@ public abstract class DataConverter {
 		}
 
 		if (fileVersion == 1 || fileVersion == 2) {
-			List<Instruction> instructions = deserializeInstructions(object.getJSONArray("instructions"));
+			final List<Instruction> instructions = deserializeInstructions(object.getJSONArray("instructions"));
 
-			List<Integer> registers = object.getJSONArray("registers").toList().stream()
+			final List<Integer> registers = object.getJSONArray("registers").toList().stream()
 					.map(r -> (int) r).collect(Collectors.toList());
 
 			return new Computer(object.getInt("opCode"), object.getInt("fnCode"), object.getInt("regA"),
@@ -87,14 +89,15 @@ public abstract class DataConverter {
 
 
 	/**
-	 * Converts the given JSON array to a list of instructions
+	 * Converts the given JSON array to a list of instructions.
+	 * 
 	 * @param array the original JSON array
 	 * @return the deserialized instruction list
 	 * @throws InstructionParseException if an error is encountered parsing an instruction
 	 */
 	private static @NonNull List<Instruction> deserializeInstructions(@NonNull JSONArray array)
 			throws InstructionParseException {
-		List<Instruction> instructions = new ArrayList<>();
+		final List<Instruction> instructions = new ArrayList<>();
 		for (Object obj : array) {
 			instructions.add(InstructionParser.convertToInstruction((String) obj));
 		}
