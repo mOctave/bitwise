@@ -38,7 +38,6 @@ public class ComputerStatePanel extends JPanel {
 	 * Creates a new computer state panel with nothing special about it.
 	 */
 	public ComputerStatePanel() {
-		super();
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setMaximumSize(new Dimension(WIDTH, HEIGHT));

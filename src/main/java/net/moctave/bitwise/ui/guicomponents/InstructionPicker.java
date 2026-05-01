@@ -33,7 +33,6 @@ public class InstructionPicker extends JDialog {
 	 * Creates and opens a new modal instruction picker.
 	 */
 	public InstructionPicker() {
-		super();
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		initPickerView();
 		getRootPane().setDefaultButton(okayButton);

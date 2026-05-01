@@ -32,7 +32,6 @@ public class ToolButton extends JButton {
 	 * @param cmd the command this button executes when pressed
 	 */
 	public ToolButton(@NonNull String icon, @Nullable KeyStroke keybind, @NonNull Command cmd) {
-		super();
 		this.cmd = cmd;
 
 		setBackground(Constants.COLOR_SILVER);
