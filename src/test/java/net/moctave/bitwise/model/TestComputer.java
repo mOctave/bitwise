@@ -988,7 +988,12 @@ public class TestComputer {
 
 	@Test
 	public void testBinaryMathResultInvalidFunction() {
-		assertArrayEquals(new int[]{0, 1, 0, 0}, Computer.binaryMathResult(150, 700, 0xF));
+		try {
+			Computer.binaryMathResult(150, 700, 0xF);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			// Expected
+		}
 	}
 
 
@@ -1061,7 +1066,12 @@ public class TestComputer {
 
 	@Test
 	public void testUnaryMathResultInvalidFunction() {
-		assertArrayEquals(new int[]{0, 1, 0, 0}, Computer.unaryMathResult(800, 3));
+		try {
+			Computer.unaryMathResult(800, 3);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			// Expected
+		}
 	}
 
 	@Test
