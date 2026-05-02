@@ -264,7 +264,7 @@ public abstract class StepExplainer {
 		} else {
 			rsf += "Since overflow was detected, flag O was set to 1.";
 		}
-		
+
 		return rsf + System.lineSeparator();
 	}
 

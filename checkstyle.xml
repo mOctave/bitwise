@@ -27,7 +27,20 @@
 		<property name="lineSeparator" value="lf"/>
 	</module>
 
+	<!--Do not include trailing whitespace outside of Javadoc comments-->
+	<module name="RegexpSingleline">
+		<property name="format" value="(\s{2,}|(?&lt;!\s+\*)\s)$"/>
+		<property name="message" value="Line includes trailing whitespace"/>
+	</module>
+
+	<!--All blank lines in Javadoc comments should end with a single space-->
+	<module name="RegexpSingleline">
+		<property name="format" value="(\s+\*|\s+\*\s{2,})$"/>
+		<property name="message" value="Include one space after the asterisk in a Javadoc comment"/>
+	</module>
+
 	<module name="TreeWalker">
+
 		<!--Only abbreviations of up to 2 characters are allowed-->
 		<module name="AbbreviationAsWordInName">
 			<property name="ignoreFinal" value="true"/>

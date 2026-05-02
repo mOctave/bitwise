@@ -132,7 +132,7 @@ public class GraphicalUserInterface extends JFrame implements UserInterface {
 		constraints.gridx = 0;
 		constraints.weightx = 1;
 		constraints.weighty = 1;
-		
+
 		mainPanel.add(instructionScroll, constraints);
 	}
 

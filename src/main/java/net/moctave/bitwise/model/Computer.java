@@ -289,7 +289,7 @@ public class Computer {
 	/**
 	 * Conducts fetch/decode operations for a move instruction.
 	 * 
-	 * @param byteList The list of instructions in machine code format 
+	 * @param byteList The list of instructions in machine code format
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
 	 */
@@ -306,7 +306,7 @@ public class Computer {
 	/**
 	 * Conducts fetch/decode operations for a binary ALU instruction.
 	 * 
-	 * @param byteList The list of instructions in machine code format 
+	 * @param byteList The list of instructions in machine code format
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
 	 */
@@ -322,7 +322,7 @@ public class Computer {
 	/**
 	 * Conducts fetch/decode operations for a unary ALU instruction.
 	 * 
-	 * @param byteList The list of instructions in machine code format 
+	 * @param byteList The list of instructions in machine code format
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
 	 */
@@ -338,7 +338,7 @@ public class Computer {
 	/**
 	 * Conducts fetch/decode operations for a jump instruction.
 	 * 
-	 * @param byteList The list of instructions in machine code format 
+	 * @param byteList The list of instructions in machine code format
 	 * @param pcValue The current program counter value, bounded on
 	 * [0, {@code byteList.size()})
 	 */

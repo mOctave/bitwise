@@ -55,7 +55,7 @@ public class ToolButton extends JButton {
 	}
 
 
-	
+
 	// MARK: ActionListeners
 	/** A hook to run the command for this button. */
 	private final class ToolButtonListener extends AbstractAction {

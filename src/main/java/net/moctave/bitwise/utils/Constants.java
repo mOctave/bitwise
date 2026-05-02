@@ -22,7 +22,7 @@ public abstract class Constants {
 		'5',
 		'6',
 		'7',
-		'8', 
+		'8',
 		'9',
 		'A',
 		'B',
