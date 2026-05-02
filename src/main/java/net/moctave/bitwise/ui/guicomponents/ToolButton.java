@@ -3,7 +3,6 @@ package net.moctave.bitwise.ui.guicomponents;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -39,9 +38,10 @@ public class ToolButton extends JButton {
 		setBorder(Constants.BORDER_STANDARD);
 
 		try {
-			final BufferedImage img = ImageIO.read(new File("./img/" + icon));
+			final BufferedImage img = ImageIO.read(getClass().getResource("/img/" + icon));
 			setIcon(new ImageIcon(img.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-		} catch (IOException e) {
+		} catch (IOException | IllegalArgumentException e) {
+			System.err.printf("No resource %s found?%n", icon);
 			e.printStackTrace();
 		}
 

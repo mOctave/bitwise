@@ -1,8 +1,9 @@
 package net.moctave.bitwise.ui.commands;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.jspecify.annotations.NonNull;
 
@@ -22,9 +23,14 @@ public class TextualHelpCommand extends Command {
 
 	@Override
 	public void run() {
-		try {
-			final String helpText = Files.readString(new File("./strings/helptext.txt").toPath());
-			getUI().showInformation(helpText);
+		try (
+			InputStream in = getClass().getResourceAsStream("/helptext.txt");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		) {
+			final StringBuilder helpText = reader.lines().collect(StringBuilder::new,
+					(x, y) -> x.append(System.lineSeparator()).append(y),
+					(a, b) -> a.append(System.lineSeparator()).append(b));
+			getUI().showInformation(helpText.toString());
 			getUI().showOperationSuccess();
 		} catch (IOException e) {
 			getUI().showInformation("Error! Failed to read help text file.");
