@@ -1,7 +1,6 @@
 package net.moctave.bitwise.model;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import org.jspecify.annotations.NonNull;
 
@@ -11,16 +10,14 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A class with helper methods to convert given lines of manually-entered text to instructions. */
 public abstract class InstructionParser {
-	// TODO: Switch to using Set.of() instead of this complicated mess.
 	/** The instructions the computer recognizes as binary. */
-	public static final @NonNull List<String> BINARY_INSTRUCTIONS =
-			Arrays.asList(new String[]{"copy", "add", "sub", "and", "or", "xor"});
+	public static final @NonNull Set<String> BINARY_INSTRUCTIONS =
+			Set.of("copy", "add", "sub", "and", "or", "xor");
 	/** The instructions the computer recognizes as unary. */
-	public static final @NonNull List<String> UNARY_INSTRUCTIONS =
-			Arrays.asList(new String[]{"inc", "neg", "not"});
+	public static final @NonNull Set<String> UNARY_INSTRUCTIONS = Set.of("inc", "neg", "not");
 	/** The instructions the computer recognizes as jump instructions. */
-	public static final @NonNull List<String> JUMP_INSTRUCTIONS =
-			Arrays.asList(new String[]{"jump", "je", "jle", "jge", "jne", "jl", "jg"});
+	public static final @NonNull Set<String> JUMP_INSTRUCTIONS =
+			Set.of("jump", "je", "jle", "jge", "jne", "jl", "jg");
 
 
 
