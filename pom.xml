@@ -10,8 +10,9 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>bitwise</name>
-  <url>http://www.example.com</url>
+  <name>Bitwise</name>
+  <url>http://github.com/moctave/bitwise</url>
+  <description>Bitwise is a novel RISC simulator designed to provide a stepping stone between simple graphical demos and more complicated technical systems. It provides both a GUI and CLI to allow the user to write, execute, and understand the instructions a simple computer could use to process data. For more information about the project, please refer to its GitHub page at http://github.com/moctave/bitwise.</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
