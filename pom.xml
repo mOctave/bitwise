@@ -5,19 +5,27 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>net.moctave.bitwise</groupId>
-  <artifactId>bitwise</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>Bitwise</name>
-  <url>http://github.com/moctave/bitwise</url>
-  <description>Bitwise is a novel RISC simulator designed to provide a stepping stone between simple graphical demos and more complicated technical systems. It provides both a GUI and CLI to allow the user to write, execute, and understand the instructions a simple computer could use to process data. For more information about the project, please refer to its GitHub page at http://github.com/moctave/bitwise.</description>
 
   <properties>
+    <app.name>Bitwise</app.name>
+    <app.description>Bitwise is a novel RISC simulator designed to provide a stepping stone between simple graphical demos and more complicated technical systems. It provides both a GUI and CLI to allow the user to write, execute, and understand the instructions a simple computer could use to process data. For more information about the project, please refer to its GitHub page at http://github.com/moctave/bitwise.</app.description>
+    <app.id>bitwise</app.id>
+    <app.version>1.0.0</app.version>
+    <app.group>net.moctave.bitwise</app.group>
+    <vendor.name>mOctave</vendor.name>
+    <copyright>Copyright © 2026 mOctave. Licensed under AGPL3.0-or-later</copyright>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
   </properties>
+
+  <groupId>${app.group}</groupId>
+  <artifactId>${app.id}</artifactId>
+  <packaging>jar</packaging>
+  <name>${app.name}</name>
+  <version>${app.version}</version>
+  <url>http://github.com/moctave/bitwise</url>
+  <description>${app.description}</description>
+
 
   <dependencies>
     <dependency>
@@ -50,6 +58,16 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.github.akman</groupId>
+          <artifactId>jpackage-maven-plugin</artifactId>
+          <version>0.1.5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -118,6 +136,30 @@
         <configuration>
           <mainClass>net.moctave.bitwise.ui.Main</mainClass>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.akman</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>jpackage</goal>
+            </goals>
+            <configuration>
+              <name>${app.name}</name>
+              <appversion>${app.version}</appversion>
+              <description>${app.description}</description>
+              <copyright>${copyright}</copyright>
+              <vendor>${vendor.name}</vendor>
+              <icon>appicon.icns</icon>
+              <input>target/</input>
+              <destination>target/</destination>
+              <mainjar>${app.id}-${app.version}-jar-with-dependencies.jar</mainjar>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
