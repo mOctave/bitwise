@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +16,8 @@ import org.junit.jupiter.api.Test;
 import net.moctave.bitwise.model.instructions.*;
 
 public class TestFileManager {
-	private FileManager fileManagerA;
-	private File testFileA;
-
-	private FileManager fileManagerB;
-	private File testFileB;
-
-	private FileManager fileManagerC;
-	private File testFileC;
+	private FileManager directoryManager;
+	private File testDirectory;
 
 	private JSONObject jsonObject;
 
@@ -33,19 +25,9 @@ public class TestFileManager {
 
 	@BeforeEach
 	public void init() {
-		try {
-			Files.deleteIfExists(Paths.get("./data/tests/foo.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail();
-		}
-		testFileA = new File("./data/tests/foo.txt");
-		testFileB = new File("./data/tests/foo.txt");
-		testFileC = new File("./data/tests");
-		
-		fileManagerA = new FileManager(testFileA);
-		fileManagerB = new FileManager(testFileB);
-		fileManagerC = new FileManager(testFileC);
+		testDirectory = new File("./data/tests");
+
+		directoryManager = new FileManager(testDirectory);
 
 		jsonObject = new JSONObject();
 		jsonObject.put("key", "value");
@@ -58,14 +40,29 @@ public class TestFileManager {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(testFileA, fileManagerA.getFile());
+		try {
+			final File file = File.createTempFile("temp-", ".txt", testDirectory);
+			file.deleteOnExit();
+			final FileManager fm = new FileManager(file);
+			assertEquals(file, fm.getFile());
+		} catch (IOException e) {
+			fail();
+		}
 	}
 
 	@Test
 	public void testReadWriteStateNormal() {
 		try {
+			final File fileA = File.createTempFile("temp-", ".txt", testDirectory);
+			final File fileB = new File(fileA.getPath());
+			fileA.deleteOnExit();
+
+			final FileManager fileManagerA = new FileManager(fileA);
+			final FileManager fileManagerB = new FileManager(fileB);
+
 			fileManagerA.writeState(jsonObject);
 			fileManagerB.writeState(jsonObject);
+
 			assertEquals(jsonObject.toString(), fileManagerA.readState().toString());
 		} catch (IOException e) {
 			fail();
@@ -75,7 +72,7 @@ public class TestFileManager {
 	@Test
 	public void testWriteStateDirectory() {
 		try {
-			fileManagerC.writeState(jsonObject);
+			directoryManager.writeState(jsonObject);
 			fail();
 		} catch (IOException e) {
 			// PASS
@@ -85,7 +82,7 @@ public class TestFileManager {
 	@Test
 	public void testReadStateDirectory() {
 		try {
-			fileManagerC.readState();
+			directoryManager.readState();
 			fail();
 		} catch (IOException e) {
 			// PASS
@@ -96,7 +93,7 @@ public class TestFileManager {
 	@Test
 	public void testReadStateNonExistant() {
 		try {
-			FileManager fileManagerD = new FileManager(new File("./THIS_FILE_DNE.txt"));
+			final FileManager fileManagerD = new FileManager(new File("./THIS_FILE_DNE.txt"));
 			fileManagerD.readState();
 			fail();
 		} catch (IOException e) {
@@ -107,9 +104,18 @@ public class TestFileManager {
 	@Test
 	public void testReadWriteInstructionsNormal() {
 		try {
+			final File fileA = File.createTempFile("temp-", ".txt", testDirectory);
+			final File fileB = new File(fileA.getPath());
+			fileA.deleteOnExit();
+
+			final FileManager fileManagerA = new FileManager(fileA);
+			final FileManager fileManagerB = new FileManager(fileB);
+
 			fileManagerA.writeInstructions(instructions);
 			fileManagerB.writeInstructions(instructions);
-			List<Instruction> result = fileManagerB.readInstructions();
+
+			final List<Instruction> result = fileManagerB.readInstructions();
+
 			assertEquals(instructions.size(), result.size());
 			for (int i = 0; i < instructions.size(); i++) {
 				assertEquals(instructions.get(i).toString(), result.get(i).toString());
@@ -122,7 +128,7 @@ public class TestFileManager {
 	@Test
 	public void testWriteInstructionsDirectory() {
 		try {
-			fileManagerC.writeInstructions(instructions);
+			directoryManager.writeInstructions(instructions);
 			fail();
 		} catch (IOException e) {
 			// PASS
@@ -132,7 +138,7 @@ public class TestFileManager {
 	@Test
 	public void testReadInstructionsDirectory() {
 		try {
-			fileManagerC.readInstructions();
+			directoryManager.readInstructions();
 			fail();
 		} catch (IOException e) {
 			// PASS
@@ -142,7 +148,7 @@ public class TestFileManager {
 	@Test
 	public void testReadInstructionsNonExistant() {
 		try {
-			FileManager fileManagerD = new FileManager(new File("./THIS_FILE_DNE.txt"));
+			final FileManager fileManagerD = new FileManager(new File("./THIS_FILE_DNE.txt"));
 			fileManagerD.readInstructions();
 			fail();
 		} catch (IOException e) {
@@ -153,10 +159,14 @@ public class TestFileManager {
 	@Test
 	public void testReadBadInstructions() {
 		try {
-			FileWriter fw = new FileWriter(testFileB);
+			final File file = File.createTempFile("temp-", ".txt", testDirectory);
+			file.deleteOnExit();
+
+			final FileManager fileManager = new FileManager(file);
+			final FileWriter fw = new FileWriter(file);
 			fw.write("NOT AN INSTRUCTION!");
 			fw.close();
-			fileManagerB.readInstructions();
+			fileManager.readInstructions();
 			fail();
 		} catch (IOException e) {
 			// PASS
