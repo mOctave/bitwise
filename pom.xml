@@ -12,11 +12,22 @@
     <app.id>bitwise</app.id>
     <app.version>1.0.0</app.version>
     <app.group>net.moctave.bitwise</app.group>
+    <app.icon>icons/appicon.png</app.icon>
     <vendor.name>mOctave</vendor.name>
     <copyright>Copyright © 2026 mOctave. Licensed under AGPL3.0-or-later</copyright>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
   </properties>
+
+  <profiles>
+    <profile>
+      <!--MacOS uses .icns files for app icons-->
+      <id>macos</id>
+      <properties>
+        <app.icon>icons/appicon.icns</app.icon>
+      </properties>
+    </profile>
+  </profiles>
 
   <groupId>${app.group}</groupId>
   <artifactId>${app.id}</artifactId>
@@ -153,7 +164,7 @@
               <description>${app.description}</description>
               <copyright>${copyright}</copyright>
               <vendor>${vendor.name}</vendor>
-              <icon>appicon.icns</icon>
+              <icon>${app.icon}</icon>
               <input>target/</input>
               <destination>target/</destination>
               <mainjar>${app.id}-${app.version}-jar-with-dependencies.jar</mainjar>
