@@ -38,6 +38,7 @@ public class TestFileManager {
 		try {
 			Files.deleteIfExists(testFileA.toPath());
 		} catch (IOException e) {
+			e.printStackTrace();
 			fail();
 		}
 		
