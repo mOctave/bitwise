@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-build
+          name: Bitwise-${{ github.sha }}.AppImage
           path: target/jpackage/*
 
   windows:
@@ -46,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-build
+          name: Bitwise-${{ github.sha }}-Windows.zip
           path: target/jpackage/*
 
   macos:
@@ -65,7 +65,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macos-build
+          name: Bitwise-${{ github.sha }}-MacOS.dmg
           path: target/jpackage/*
 
   release:
@@ -80,6 +80,21 @@ jobs:
       - macos
     steps:
       - uses: actions/checkout@v5
+      - name: Download Appimage
+        uses: actions/download-artifact@v8
+        with:
+          name: Bitwise-${{ github.sha }}.AppImage
+          path: .
+      - name: Download Windows Build
+        uses: actions/download-artifact@v8
+        with:
+          name: Bitwise-${{ github.sha }}-Windows.zip
+          path: .
+      - name: Download MacOS Build
+        uses: actions/download-artifact@v8
+        with:
+          name: Bitwise-${{ github.sha }}-MacOS.zip
+          path: .
       - name: Configure Tag
         run: |
           git tag --force continuous ${{ github.sha }}
@@ -91,4 +106,4 @@ jobs:
           prerelease: true
           name: Continuous
           tag: continuous
-          artifacts: "${{needs.ubuntu.outputs.ubuntu-build}},${{needs.windows.outputs.windows-build}},${{needs.macos.outputs.macos-build}}"
+          artifacts: "Bitwise-${{ github.sha }}.AppImage,Bitwise-${{ github.sha }}-Windows.zip,Bitwise-${{ github.sha }}-MacOS.zip"
