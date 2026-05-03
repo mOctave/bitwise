@@ -79,10 +79,9 @@ jobs:
       - windows
       - macos
     steps:
+      - uses: actions/checkout@v5
       - name: Configure Tag
         run: |
-          pwd
-          ls
           git tag --force continuous ${{ github.sha }}
           git push --tags --force
       - name: Create Release
