@@ -90,7 +90,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
-          <parallel>classes</parallel>
+          <forkCount>1</forkCount>
+          <reuseForks>false</reuseForks>
+          <parallel>none</parallel>
         </configuration>
       </plugin>
 
