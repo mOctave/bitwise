@@ -8,7 +8,11 @@
 
   <properties>
     <app.name>Bitwise</app.name>
-    <app.description>Bitwise is a novel RISC simulator designed to provide a stepping stone between simple graphical demos and more complicated technical systems. It provides both a GUI and CLI to allow the user to write, execute, and understand the instructions a simple computer could use to process data. For more information about the project, please refer to its GitHub page at http://github.com/moctave/bitwise.</app.description>
+    <app.description>Bitwise is a novel RISC simulator designed to provide a stepping stone between
+      simple graphical demos and more complicated technical systems. It provides both a GUI and CLI
+      to allow the user to write, execute, and understand the instructions a simple computer could
+      use to process data. For more information about the project, please refer to its GitHub page
+      at http://github.com/moctave/bitwise.</app.description>
     <app.id>bitwise</app.id>
     <app.version>1.0.0</app.version>
     <app.group>net.moctave.bitwise</app.group>
@@ -21,7 +25,8 @@
 
   <profiles>
     <profile>
-      <!--MacOS uses .icns files for app icons-->
+      <!--MacOS
+      uses .icns files for app icons-->
       <id>macos</id>
       <properties>
         <app.icon>icons/appicon.icns</app.icon>
@@ -84,6 +89,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
+        <configuration>
+          <runOrder>alphabetical</runOrder>
+        </configuration>
       </plugin>
 
       <plugin>
