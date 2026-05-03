@@ -1,0 +1,90 @@
+name: CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  ubuntu:
+    name: Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+      - name: Package
+        run: mvn clean verify
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu-build
+          path: target/jpackage/*
+
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+      - name: Package
+        run: mvn clean verify
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: target/jpackage/*
+
+  macos:
+    name: MacOS (Arm)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+      - name: Package
+        run: mvn clean verify -Pmacos
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: target/jpackage/*
+
+  release:
+    name: Continuous Release
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs:
+      - ubuntu
+      - windows
+      - macos
+    steps:
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          draft: false
+          prerelease: true
+          name: Continuous
+          artifacts: "${{needs.ubuntu.outputs.ubuntu-build}},${{needs.windows.outputs.windows-build}},${{needs.macos.outputs.macos-build}}"
+
+        
