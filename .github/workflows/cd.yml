@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Set vars
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
@@ -25,16 +28,20 @@ jobs:
       - name: Package
         run: mvn clean verify
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ github.sha }}.AppImage
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage
           path: target/jpackage/*
+          archive: false
 
   windows:
     name: Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Set vars
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
@@ -44,16 +51,20 @@ jobs:
       - name: Package
         run: mvn clean verify
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ github.sha }}-Windows.zip
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe
           path: target/jpackage/*
+          archive: false
 
   macos:
     name: MacOS (Arm)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Set vars
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
@@ -63,10 +74,11 @@ jobs:
       - name: Package
         run: mvn clean verify -Pmacos
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ github.sha }}-MacOS.dmg
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg
           path: target/jpackage/*
+          archive: false
 
   release:
     name: Continuous Release
@@ -80,30 +92,33 @@ jobs:
       - macos
     steps:
       - uses: actions/checkout@v5
-      - name: Download Appimage
+      - name: Set vars
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Download appimage
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ github.sha }}.AppImage
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage
           path: .
-      - name: Download Windows Build
+      - name: Download Windows build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ github.sha }}-Windows.zip
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe
           path: .
-      - name: Download MacOS Build
+      - name: Download MacOS build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ github.sha }}-MacOS.zip
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg
           path: .
-      - name: Configure Tag
+      - name: Configure tag
         run: |
-          git tag --force continuous ${{ github.sha }}
+          git tag --force continuous ${{ steps.vars.outputs.sha_short }}
           git push --tags --force
-      - name: Create Release
+      - name: Create release
         uses: ncipollo/release-action@v1
         with:
           draft: false
           prerelease: true
           name: Continuous
           tag: continuous
-          artifacts: "Bitwise-${{ github.sha }}.AppImage,Bitwise-${{ github.sha }}-Windows.zip,Bitwise-${{ github.sha }}-MacOS.zip"
+          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage,Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg"
