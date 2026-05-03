@@ -85,6 +85,5 @@ jobs:
           draft: false
           prerelease: true
           name: Continuous
+          commit: main
           artifacts: "${{needs.ubuntu.outputs.ubuntu-build}},${{needs.windows.outputs.windows-build}},${{needs.macos.outputs.macos-build}}"
-
-        
