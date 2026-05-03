@@ -30,9 +30,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu
           path: target/jpackage/*
-          archive: false
 
   windows:
     name: Windows
@@ -53,9 +52,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows
           path: target/jpackage/*
-          archive: false
 
   macos:
     name: MacOS (Arm)
@@ -76,9 +74,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS
           path: target/jpackage/*
-          archive: false
 
   release:
     name: Continuous Release
@@ -98,17 +95,17 @@ jobs:
       - name: Download appimage
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu
           path: .
       - name: Download Windows build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Windows
           path: .
       - name: Download MacOS build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg
+          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS
           path: .
       - name: Configure tag
         run: |
@@ -121,4 +118,4 @@ jobs:
           prerelease: true
           name: Continuous
           tag: continuous
-          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}.AppImage,Bitwise-${{ steps.vars.outputs.sha_short }}-Windows.exe,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.dmg"
+          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu,Bitwise-${{ steps.vars.outputs.sha_short }}-Windows,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS"
