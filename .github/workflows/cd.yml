@@ -79,11 +79,15 @@ jobs:
       - windows
       - macos
     steps:
+      - name: Configure Tag
+        run: |
+          git tag --force continuous ${{ github.sha }}
+          git push --tags --force
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           draft: false
           prerelease: true
           name: Continuous
-          commit: main
+          tag: continuous
           artifacts: "${{needs.ubuntu.outputs.ubuntu-build}},${{needs.windows.outputs.windows-build}},${{needs.macos.outputs.macos-build}}"
