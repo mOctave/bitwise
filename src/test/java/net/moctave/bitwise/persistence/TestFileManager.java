@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +33,15 @@ public class TestFileManager {
 
 	@BeforeEach
 	public void init() {
-		testFileA = new File("./data/tests/foo.txt");
-		testFileB = new File("./data/tests/foo.txt");
-		testFileC = new File("./data/tests");
 		try {
-			Files.deleteIfExists(testFileA.toPath());
+			Files.deleteIfExists(Paths.get("./data/tests/foo.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail();
 		}
+		testFileA = new File("./data/tests/foo.txt");
+		testFileB = new File("./data/tests/foo.txt");
+		testFileC = new File("./data/tests");
 		
 		fileManagerA = new FileManager(testFileA);
 		fileManagerB = new FileManager(testFileB);
