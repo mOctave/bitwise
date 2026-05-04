@@ -94,6 +94,11 @@ jobs:
       - name: Set vars
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Download jar
+        uses: actions/download-artifact@v8
+        with:
+          name: build-jar
+          path: .
       - name: Download appimage
         uses: actions/download-artifact@v8
         with:
