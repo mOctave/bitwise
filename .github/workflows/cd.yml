@@ -116,5 +116,5 @@ jobs:
           prerelease: true
           name: Continuous
           tag: continuous
-          body: This is an automated build of the latest source code. While it'll probably work, there's always a chance it'll crash, corrupt your data, eat your kittens, etc. Triggered on $(date -u '+%Y/%m/%d, %H:%M') UTC by commit ${{ github.sha }} (@${{ github.actor }}).
-          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu,Bitwise-continuous-Windows,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS"
+          body: This is an automated build of the latest source code. While it'll probably work, there's always a chance it'll crash, corrupt your data, eat your kittens, etc. Triggered by commit ${{ github.sha }} (@${{ github.actor }}).
+          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu.zip,Bitwise-continuous-Windows.zip,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.zip"
