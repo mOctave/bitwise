@@ -111,7 +111,10 @@ jobs:
       - name: Check directory
         run: ls
       - name: Rename files
-        run: rename.ul "s/\d.\d.\d/${{ steps.vars.outputs.sha_short }}" *.*
+        run: |
+          find . -type f -name '*.deb' -exec sh -c 'x="{}"; mv "$x" "bitwise-${{ steps.vars.outputs.sha_short }}-ubuntu.deb"' \;
+          find . -type f -name '*.exe' -exec sh -c 'x="{}"; mv "$x" "bitwise-${{ steps.vars.outputs.sha_short }}-windows.exe"' \;
+          find . -type f -name '*.dmg' -exec sh -c 'x="{}"; mv "$x" "bitwise-${{ steps.vars.outputs.sha_short }}-macos.dmg"' \;
       - name: Check directory
         run: ls
       - name: Create release
@@ -123,4 +126,4 @@ jobs:
           name: Continuous
           tag: continuous
           body: This is an automated build of the latest source code. While it'll probably work, there's always a chance it'll crash, corrupt your data, eat your kittens, etc. Triggered by commit ${{ github.sha }} (@${{ github.actor }}).
-          artifacts: "bitwise_${{ steps.vars.outputs.sha_short }}_amd64.deb,Bitwise-${{ steps.vars.outputs.sha_short }}.exe,Bitwise-${{ steps.vars.outputs.sha_short }}.dmg"
+          artifacts: "bitwise-${{ steps.vars.outputs.sha_short }}-ubuntu.deb,bitwise-${{ steps.vars.outputs.sha_short }}-windows.exe,bitwise-${{ steps.vars.outputs.sha_short }}-macos.dmg"
