@@ -108,6 +108,8 @@ jobs:
         run: |
           git tag --force continuous ${{ steps.vars.outputs.sha_short }}
           git push --tags --force
+      - name: Check directory
+        run: ls
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
