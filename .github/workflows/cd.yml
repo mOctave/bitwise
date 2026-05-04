@@ -30,7 +30,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu
+          name: build-ubuntu
           path: target/jpackage/*
 
   windows:
@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-continuous-Windows
+          name: build-windows
           path: target/jpackage/*
 
   macos:
@@ -71,7 +71,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS
+          name: build-macos
           path: target/jpackage/*
 
   release:
@@ -92,22 +92,26 @@ jobs:
       - name: Download appimage
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu
+          name: build-ubuntu
           path: .
       - name: Download Windows build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-continuous-Windows
+          name: build-windows
           path: .
       - name: Download MacOS build
         uses: actions/download-artifact@v8
         with:
-          name: Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS
+          name: build-macos
           path: .
       - name: Configure tag
         run: |
           git tag --force continuous ${{ steps.vars.outputs.sha_short }}
           git push --tags --force
+      - name: Check directory
+        run: ls
+      - name: Rename files
+        run: rename.ul "s/\d.\d.\d/${{ steps.vars.outputs.sha_short }}" *.*
       - name: Check directory
         run: ls
       - name: Create release
@@ -119,4 +123,4 @@ jobs:
           name: Continuous
           tag: continuous
           body: This is an automated build of the latest source code. While it'll probably work, there's always a chance it'll crash, corrupt your data, eat your kittens, etc. Triggered by commit ${{ github.sha }} (@${{ github.actor }}).
-          artifacts: "Bitwise-${{ steps.vars.outputs.sha_short }}-Ubuntu.zip,Bitwise-continuous-Windows.zip,Bitwise-${{ steps.vars.outputs.sha_short }}-MacOS.zip"
+          artifacts: "bitwise_${{ steps.vars.outputs.sha_short }}_amd64.deb,Bitwise-${{ steps.vars.outputs.sha_short }}.exe,Bitwise-${{ steps.vars.outputs.sha_short }}.dmg"
