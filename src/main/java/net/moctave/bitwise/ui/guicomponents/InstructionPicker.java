@@ -35,13 +35,21 @@ import net.moctave.bitwise.model.instructions.*;
 
 /** A modal dialog that allows you to pick an instruction. */
 public class InstructionPicker extends JDialog {
+	/** The component that lets the user pick a function. */
 	private @NonNull FunctionPicker functionPicker;
+	/** The component that lets the user pick a value of regA. */
 	private @NonNull RegisterPicker regAPicker;
+	/** The component that lets the user pick a value of regB. */
 	private @NonNull RegisterPicker regBPicker;
+	/** The component that lets the user pick a label. */
 	private @NonNull TextPicker labelPicker;
+	/** The component that lets the user pick a value of valC. */
 	private @NonNull TextPicker valCPicker;
+	/** The button that lets the user confirm their selection. */
 	private @NonNull JButton okayButton;
+	/** The button that lets the user cancel their selection. */
 	private @NonNull JButton cancelButton;
+	/** A value that, if true, blocks the use of the instruction the user was selecting. */
 	private boolean didCancel;
 
 	// MARK: Constructor

@@ -23,6 +23,7 @@ import net.moctave.bitwise.ui.UserInterface;
 /** A command that can be executed by either the CLI or GUI. */
 public abstract class Command {
 	// MARK: Fields
+	/** The user interface associated with this command. */
 	private final @NonNull UserInterface ui;
 
 

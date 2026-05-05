@@ -23,8 +23,11 @@ import net.moctave.bitwise.utils.Constants;
 /** A register capable of storing a value of a certain size. */
 public class Register {
 	// MARK: Fields
+	/** The name of this register. */
 	private final @NonNull String name;
+	/** The value stored in this register (unbounded). */
 	private int value;
+	/** The apparent size of this register, bounded on [1, 32]. */
 	private final int size;
 
 

@@ -33,6 +33,7 @@ import net.moctave.bitwise.model.instructions.Instruction;
 /** A wrapper for a file with methods to read or modify its contents as JSON or assembly. */
 public class FileManager {
 	// MARK: Fields
+	/** The file this file manager manages. */
 	private final @NonNull File file;
 
 	// MARK: Constructor

@@ -30,7 +30,9 @@ import net.moctave.bitwise.utils.Constants;
 
 /** An abstract class providing methods shared by all components of an instrucion picker. */
 public abstract class InstructionPickerComponent extends JPanel {
+	/** A header that is displayed above this component. */
 	private @NonNull JLabel header;
+	/** The main content pane for this component. */
 	private @NonNull JPanel content;
 
 	// MARK: Constructor

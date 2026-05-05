@@ -35,8 +35,11 @@ import net.moctave.bitwise.utils.Conversion;
 
 /** A command-line interface. */
 public class CommandLineInterface implements UserInterface {
+	/** A map linking user-enterable strings to commands. */
 	private final @NonNull Map<String, Command> commands;
+	/** The scanner that obtains user input from the command line. */
 	private final @NonNull Scanner scanner;
+	/** The command to be printed when the user asks for help. */
 	private final @NonNull TextualHelpCommand helpCommand;
 
 

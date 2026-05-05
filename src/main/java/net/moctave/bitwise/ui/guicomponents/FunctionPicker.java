@@ -30,12 +30,18 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A pane with buttons allowing the user to select a function and opcode. */
 public class FunctionPicker extends InstructionPickerComponent {
+	/** The instruction picker component to enable for opcodes with a regA value. */
 	private final @NonNull InstructionPickerComponent regAPicker;
+	/** The instruction picker component to enable for opcodes with a regB value. */
 	private final @NonNull InstructionPickerComponent regBPicker;
+	/** The instruction picker component to enable for opcodes with a label. */
 	private final @NonNull InstructionPickerComponent labelPicker;
+	/** The instruction picker component to enable for opcodes with a valC value. */
 	private final @NonNull InstructionPickerComponent valCPicker;
 
+	/** The currently selected function. */
 	private @NonNull String choice;
+	/** The buttons in this picker. */
 	private @NonNull List<JButton> buttons;
 
 	// MARK: Constructor
@@ -142,10 +148,15 @@ public class FunctionPicker extends InstructionPickerComponent {
 	// MARK: ActionListeners
 	/** An action listener for the function selection buttons. */
 	private class FunctionButtonListener implements ActionListener {
+		/** The label for the given button. */
 		private final @NonNull String label;
+		/** Whether the button corresponds to an instruction with regA. */
 		private final boolean hasA;
+		/** Whether the button corresponds to an instruction with regB. */
 		private final boolean hasB;
+		/** Whether the button corresponds to an instruction with a label. */
 		private final boolean hasLabel;
+		/** Whether the button corresponds to an instruction with valC. */
 		private final boolean hasC;
 
 		/**

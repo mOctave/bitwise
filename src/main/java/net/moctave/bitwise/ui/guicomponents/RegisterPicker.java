@@ -28,7 +28,9 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A pane with buttons allowing the user to select a register from 1 to 15. */
 public class RegisterPicker extends InstructionPickerComponent {
+	/** The currently selected register. */
 	private int choice = 1;
+	/** The buttons in this picker. */
 	private @NonNull JButton[] buttons;
 
 	// MARK: Constructor
@@ -82,6 +84,7 @@ public class RegisterPicker extends InstructionPickerComponent {
 	// MARK: ActionListeners
 	/** An action listener for the register selection buttons. */
 	private class RegisterButtonListener implements ActionListener {
+		/** The register number associated with this button. */
 		private final int index;
 
 		/**

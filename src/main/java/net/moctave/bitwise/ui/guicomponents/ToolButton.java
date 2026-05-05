@@ -36,6 +36,7 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A button used in the toolbar of the GUI. */
 public class ToolButton extends JButton {
+	/** The command executed when this button is pressed. */
 	private final @NonNull Command cmd;
 
 	// MARK: Constructor

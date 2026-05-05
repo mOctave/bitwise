@@ -73,7 +73,9 @@ public abstract class Constants {
 	public static final Color COLOR_BLUE = new Color(13, 121, 242);
 
 	// MARK: Standard Border
+	/** The width of the inner padding around the standard border. */
 	private static final int INNER = 1;
+	/** The width of the outer margins around the standard border. */
 	private static final int OUTER = 1;
 	/** A border to be shared by GUI components. */
 	public static final Border BORDER_STANDARD = BorderFactory.createCompoundBorder(

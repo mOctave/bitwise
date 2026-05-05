@@ -30,24 +30,42 @@ import net.moctave.bitwise.utils.Constants;
 /** A class storing registers, flags, and instructions, acting as a full computer. */
 public class Computer {
 	// MARK: Fields
+	/** The primary instance of this computer that the app refers to. */
 	private static Computer instance = new Computer();
 
+	/** The opcode of the instruction currently being processed. */
 	private @NonNull Register opCode;
+	/** The function code of the instruction currently being processed. */
 	private @NonNull Register fnCode;
+	/** The first register of the instruction currently being processed. */
 	private @NonNull Register regA;
+	/** The second register of the instruction currently being processed. */
 	private @NonNull Register regB;
+	/** The register that will be written to at the end of the current cycle. */
 	private @NonNull Register regWrite;
+	/** The value stored in the register indicated by {@link #regA}. */
 	private @NonNull Register valA;
+	/** The value stored in the register indicated by {@link #regB}. */
 	private @NonNull Register valB;
+	/** The extra value from the instruction currently being processed. */
 	private @NonNull Register valC;
+	/** The value that will be written to a register at the end of the current cycle. */
 	private @NonNull Register valWrite;
+	/** The current value of the program counter. */
 	private @NonNull Register programCounter;
+	/** The next value of the program counter. */
 	private @NonNull Register nextProgramCounter;
+	/** The register storing the Z (zero) flag for this computer. */
 	private @NonNull Register flagZ;
+	/** The register storing the N (negative) flag for this computer. */
 	private @NonNull Register flagN;
+	/** The register storing the O (overflow) flag for this computer. */
 	private @NonNull Register flagO;
+	/** A list of all this computer's instructions. */
 	private @NonNull List<Instruction> instructions;
+	/** The next step to take in the machine cycle. */
 	private int nextStep;
+	/** This computer's array of 15 data registers. */
 	private @NonNull Register[] registers;
 
 	// MARK: Constructor

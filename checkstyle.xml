@@ -202,10 +202,8 @@
 		<module name="JavadocStyle"/>
 		<module name="JavadocType"/>
 
-		<!--Public variables should have Javadoc-->
-		<module name="JavadocVariable">
-			<property name="accessModifiers" value="public"/>
-		</module>
+		<!--Variables should have Javadoc-->
+		<module name="JavadocVariable"/>
 
 		<!--Lambdas should not exceed 5 lines in length-->
 		<module name="LambdaBodyLength">
@@ -235,14 +233,13 @@
 		-->
 		<module name="MissingDeprecated"/>
 
-		<!--All public methods should have Javadoc comments-->
-		<module name="MissingJavadocMethod"/>
+		<!--All methods should have Javadoc comments-->
+		<module name="MissingJavadocMethod">
+			<property name="scope" value="private"/>
+		</module>
 
 		<!--package-info.java files should have Javadoc comments-->
 		<module name="MissingJavadocPackage"/>
-
-		<!--All public types should have Javadoc comments-->
-		<module name="MissingJavadocType"/>
 
 		<!--If @inheritDoc is used, an @Override annotation should be present-->
 		<module name="MissingOverride"/>

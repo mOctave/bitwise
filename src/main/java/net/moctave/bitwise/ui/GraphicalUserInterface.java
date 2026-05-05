@@ -59,22 +59,33 @@ import net.moctave.bitwise.utils.Conversion;
 /** A graphical user interface for the program. */
 public class GraphicalUserInterface extends JFrame implements UserInterface {
 	// MARK: Fields
+	/** The index of the currently selected instruction. */
 	private int selectedIndex;
 
+	/** A toolbar with buttons the user can use to give commands. */
 	private @NonNull JToolBar menuBar;
+	/** The main panel that most of the GUI exists inside. */
 	private @NonNull JPanel mainPanel;
 
+	/** The left panel that displays the computer's instructions. */
 	private @NonNull JPanel instructionPanel;
+	/** A scroll pane to allow the instruction panel to display an arbitrary number of instructions. */
 	private @NonNull JScrollPane instructionScroll;
 
+	/** The central panel that displays the current machine code (if any). */
 	private @NonNull JTextArea machineCodePanel;
+	/** A scroll pane to allow the machine code panel to display an arbitrary number of bytes. */
 	private @NonNull JScrollPane machineCodeScroll;
 
-
+	/** The right panel that displays the computer state and information. */
 	private @NonNull JPanel rightPanel;
+	/** The panel that displays the computer state. */
 	private @NonNull JPanel statePanel;
+	/** The panel that displays text messages for the user. */
 	private @NonNull JTextPane infoPanel;
+	/** A scroll pane to allow the info panel to display messages of arbitrary length. */
 	private @NonNull JScrollPane infoScroll;
+	/** The status bar that indicated whether the last operation was successful or not. */
 	private @NonNull JLabel statusBar;
 
 	// MARK: Constructor

@@ -25,6 +25,7 @@ import org.jspecify.annotations.NonNull;
 
 /** A pane with buttons allowing the user to enter a number or text. */
 public class TextPicker extends InstructionPickerComponent {
+	/** The text field used to obtain user input for this component. */
 	private @NonNull JTextField field;
 
 	// MARK: Constructor

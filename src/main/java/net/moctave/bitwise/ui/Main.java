@@ -48,6 +48,7 @@ public abstract class Main {
 	// MARK: App
 	/** A specific app instance with a UI. */
 	private static class App implements Runnable {
+		/** The app's user interface. */
 		private final UserInterface ui;
 
 		/**

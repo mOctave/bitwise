@@ -38,9 +38,13 @@ import net.moctave.bitwise.utils.Constants;
 
 /** A panel showing a single instruction (in assembly format) and a button to select it. */
 public class InstructionPanel extends JPanel {
+	/** The user interface this panel is contained in. */
 	private final @NonNull GraphicalUserInterface gui;
+	/** The index of the instruction this panel should display. */
 	private final int index;
+	/** The textual display for this panel. */
 	private final @NonNull JLabel label;
+	/** The button that lets the user select this instruction. */
 	private final @NonNull JButton button;
 
 	// MARK: Constructor

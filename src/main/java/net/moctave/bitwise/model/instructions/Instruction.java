@@ -26,12 +26,19 @@ import org.jspecify.annotations.*;
 /** A single instruction (in assembly or machine code) to be executed by the RISC. */
 public abstract class Instruction {
 	// MARK: Fields
+	/** The operation code (general type) of this instruction. */
 	private int opCode;
+	/** The function code (specific type) of this instruction. */
 	private int fnCode;
+	/** The first register associated with this instruction. */
 	private int regA;
+	/** The second register associated with this instruction. */
 	private int regB;
+	/** A value associated with this instruction that is not linked to any register. */
 	private int valC;
+	/** This instruction's label. */
 	private @Nullable String label;
+	/** true if this instruction is a label, false otherwise. */
 	private boolean isLabel;
 
 
