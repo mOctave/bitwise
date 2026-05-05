@@ -36,7 +36,7 @@ public class InstructionPicker extends JDialog {
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		initPickerView();
 		getRootPane().setDefaultButton(okayButton);
-		didCancel = false;
+		didCancel = true;
 		setMinimumSize(new Dimension(700, 350));
 		setVisible(true);
 	}
@@ -185,6 +185,7 @@ public class InstructionPicker extends JDialog {
 		 */
 		@Override
 		public void actionPerformed(@NonNull ActionEvent e) {
+			didCancel = false;
 			setVisible(false);
 		}
 	}
@@ -196,7 +197,6 @@ public class InstructionPicker extends JDialog {
 		 */
 		@Override
 		public void actionPerformed(@NonNull ActionEvent e) {
-			didCancel = true;
 			setVisible(false);
 		}
 	}
